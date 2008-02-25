@@ -1,10 +1,10 @@
 /* Function: median2D */
-/* Version: 1.0.0 */
+/* Version: 1.0.1 */
 /*
  * Calculate median of a box from a 2D image matrix.  Can use mask.
  *
  * void median2D( double **data, unsigned long ii, unsigned long jj,
- *	unsigned long naxes[], unsigned long halfbox[], > double *median,
+ *	long naxes[], unsigned long halfbox[], > double *median,
  *	double **pmask)
  *
  * Needs:
@@ -16,7 +16,7 @@
 #include <stddef.h>		/* for NULL */
 
 void median2D( double **data, unsigned long ii, unsigned long jj,
-	unsigned long naxes[], unsigned long halfbox[], double *median,
+	long naxes[], unsigned long halfbox[], double *median,
 	double **pmask)
 {
  long int kk,ll,len,i=0;

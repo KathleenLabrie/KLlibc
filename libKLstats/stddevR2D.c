@@ -1,5 +1,5 @@
 /* Function: stddevR2D */
-/* Version: 1.0.3 */
+/* Version: 1.0.4 */
 /* Uses sum and sum of squares to calculate variance.  Raster scan. 
  * Does not handle distribution around zero (i.e. with + and - values)
  *
@@ -11,7 +11,7 @@
 #include <math.h>
 
 void stddevR2D(double **data, long ii, long jj, 
-               unsigned long naxes[], unsigned long halfbox[], STATS *stats,
+               long naxes[], unsigned long halfbox[], STATS *stats,
 		 RASTER *rscan, double **pmask)
 {
  void rterror(char error_text[]);

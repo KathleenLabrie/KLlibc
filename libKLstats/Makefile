@@ -38,7 +38,7 @@ PKGNAME = KLstats
 BASIC_FILES = Makefile Changes TODO
 DOCS = doc.txt
 VERSION = 0
-RELEASE = $(VERSION).1.7
+RELEASE = $(VERSION).1.8
 
 #### Object Definitions ####
 OBJECTS = dquickfmedian.o median2D.o medianbox.o stddev.o stddev2D.o \

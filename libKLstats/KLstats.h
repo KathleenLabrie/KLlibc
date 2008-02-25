@@ -5,26 +5,26 @@
 
 #include <mystruct.h>
 
-int dchisqimg(double **ppix1, double **ppix2, unsigned long int naxes[],
+int dchisqimg(double **ppix1, double **ppix2, long int naxes[],
 	unsigned long int section[],double **pstddev, double *chisq, 
 	double *prob);
 double dquickfmedian( double d_vec[], unsigned long lenvec );
 void median2D( double **data, unsigned long ii, unsigned long jj,
-	unsigned long naxes[], unsigned long halfbox[], double *median,
+	long naxes[], unsigned long halfbox[], double *median,
 	double **pmask);
-int medianbox( double **data, unsigned long naxes[], double *median,
+int medianbox( double **data, long naxes[], double *median,
 	double **pmask);
 void stddev(float *datavec, int n, float *ave, float *sdev, float *var);
 int stddev2D(double **data, unsigned long ii, unsigned long jj, 
-	     unsigned long naxes[], unsigned long halfbox[], STATS *stats,
+	     long naxes[], unsigned long halfbox[], STATS *stats,
 	     double **pmask);
 void stddevF2D(double **data, long ii, long jj, 
-               unsigned long naxes[], unsigned long halfbox[], STATS *stats,
+               long naxes[], unsigned long halfbox[], STATS *stats,
 		 RASTER *rscan);
 void stddevR2D(double **data, long ii, long jj, 
-               unsigned long naxes[], unsigned long halfbox[], STATS *stats,
+               long naxes[], unsigned long halfbox[], STATS *stats,
 		 RASTER *rscan, double **pmask);
-int stddevbox(double **data, unsigned long naxes[], STATS *stats, 
+int stddevbox(double **data, long naxes[], STATS *stats, 
 		double **pmask);
 
 /* NR Functions */

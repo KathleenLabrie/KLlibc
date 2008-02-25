@@ -1,8 +1,8 @@
 /* Function: medianbox */
-/* Version: 1.0.0
+/* Version: 1.0.1
  * 	Calculate median of a box of data.  Can use mask.
  *
- * int medianbox( double **data, unsigned long naxes[], > double *median,
+ * int medianbox( double **data, long naxes[], > double *median,
  *	double **pmask)
  *
  * Arguments:
@@ -29,7 +29,7 @@
 #include <myutil.h>
 #include <stddef.h>	/* for NULL */
 
-int medianbox( double **data, unsigned long naxes[], double *median,
+int medianbox( double **data, long naxes[], double *median,
 	double **pmask)
 {
  unsigned long kk,ll,len,i=0;

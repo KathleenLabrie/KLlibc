@@ -3,7 +3,7 @@
 /*  Calculate chisq of flux in each pixel of a true image, ppix1,
  *  versus a fake image, ppix2.  prob equals Q=1-P(a,x).
  *
- * int dchisqimg(double **ppix1, double **ppix2, unsigned long int naxes[],
+ * int dchisqimg(double **ppix1, double **ppix2, long int naxes[],
  *	double *chisq, double *prob);
  *
  * Calling dchisqimg
@@ -16,7 +16,7 @@
 #include <KLfunc.h>	/* for gammq() */
 #include <stdio.h>
 
-int dchisqimg(double **ppix1, double **ppix2, unsigned long int naxes[],
+int dchisqimg(double **ppix1, double **ppix2, long int naxes[],
 	unsigned long int section[], double **pstddev, double *chisq,
 	double *prob)
 {

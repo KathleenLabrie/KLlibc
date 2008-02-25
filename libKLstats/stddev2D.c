@@ -1,5 +1,5 @@
 /* Function : stddev2D */
-/* Version : 2.0.1 */
+/* Version : 2.0.2 */
 /* Average and stddev/variance. Mask rejection optional */
 /* 2-D version */
 /*
@@ -15,7 +15,7 @@
 #include <stddef.h>	/* for NULL */
 
 int stddev2D(double **data, unsigned long ii, unsigned long jj, 
-	     unsigned long naxes[], unsigned long halfbox[], STATS *stats,
+	     long naxes[], unsigned long halfbox[], STATS *stats,
 	     double **pmask)
 {
  void nrerror(char error_text[]);

@@ -1,9 +1,9 @@
 /* Function: stddevbox.c */
-/* Version: 1.0.1
+/* Version: 1.0.2
  *	Sum, sum of squares, average, variance and stddev of a box of value.
  *	Mask is optional.
  *
- * int stddevbox( double **data, unsigned long naxes[], STATS *stats,
+ * int stddevbox( double **data, long naxes[], STATS *stats,
  *		    double **pmask );
  *
  * Arguments:
@@ -31,7 +31,7 @@
 #include <math.h>
 #include <stddef.h>		/* for NULL */
 
-int stddevbox(double **data, unsigned long naxes[], STATS *stats, 
+int stddevbox(double **data, long naxes[], STATS *stats, 
 		double **pmask)
 {
  void nrerror(char error_text[]);
