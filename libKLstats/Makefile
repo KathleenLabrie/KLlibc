@@ -17,8 +17,9 @@ MAKE = make
 GZIP = gzip -S .gz
 
 #### Environment Variable Definitions ####
-OS = macosx
-PREFIX = /Users/klabrie/prgc
+UNAME = `uname -s`
+OS = redhat
+PREFIX = $(HOME)/prgc
 INCLDIR = $(PREFIX)/include
 LIBDIR = $(PREFIX)/lib
 
@@ -38,7 +39,7 @@ PKGNAME = KLstats
 BASIC_FILES = Makefile Changes TODO
 DOCS = doc.txt
 VERSION = 0
-RELEASE = $(VERSION).1.8
+RELEASE = $(VERSION).1.9
 
 #### Object Definitions ####
 OBJECTS = dquickfmedian.o median2D.o medianbox.o stddev.o stddev2D.o \
