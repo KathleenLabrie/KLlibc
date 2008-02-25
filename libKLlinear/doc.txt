@@ -1,0 +1,47 @@
+	       KL Solution of Linear Algebraic Equation Library
+				KLlinear v1.0.0
+				March 22, 2001
+
+Various functions to solve linear algebraic equations.  The sources are
+varied (Numerical Recipes, Xmgr) and the original is likely to have been
+modified (e.g. a[0], double precision, etc).
+
+------------------------------------------------------------------------
+Gauss-Jordan Elimination
+
+dgauss:
+	Simple gauss elimination - no pivoting or scaling strategies
+	all matrices are sum-pos-def.
+	Taken from Xmgr, modified.
+
+	A.x = b
+
+	x is return through b
+
+	void dgauss(int n, double **a, double *b);
+	  Inputs:
+		n	- size of input matrix A
+		a	- input n x n matrix A
+		b	- input right-hand side vector
+	Output:
+		b	- solution vector x
+
+
+dgaussj:
+	Gauss-Jordan elimination with full pivoting.
+	
+	Adapted for double precision
+
+	Can solve multiple linear sets together.  A.x1=b1 , A.x2=b2, A.xm=bm.
+
+	void dgaussj(double **a, int n, double **b, int m);
+	  Inputs:
+		a	- input n x n matrix
+		n	- size of matrix a
+		b	- n x m input containing the m right-hand side vectors
+		m	- number of right-hand side vectors.
+	  Outputs:
+		b	- corresponding set of solution vectors x.
+
+
+-------------------------------------------------------------------------
