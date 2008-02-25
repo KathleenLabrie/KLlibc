@@ -5,11 +5,14 @@
 
 #include <math.h>
 
-void fgauss(double x, double a[], double *y, double dyda[], int na, int ndim)
+/*void fgauss(double x, double a[], double *y, double dyda[], int na, int ndim)
+*/
+void fgauss(double x[], double a[], double *y, double dyda[], int na)
 {
  double ex, arg;
 
- arg=x-a[2];
+
+ arg=x[0]-a[2];
  ex=exp( -0.5*( (arg*arg)/(a[3]*a[3]) ) );
  *y=a[1]*ex + a[0];
  dyda[0]=1;

@@ -20,3 +20,12 @@
 	Fixed fmoffatS.  prototype did not match the one in KLfunc.h.
 	Added functions gammq,gcf,gser.
 	Upgrade of Makefile
+
+22 September 2003: [v1.2.4]
+	Fixed fgauss.  Prototype did not match the one in KLfunc.h.
+ 	This whole package got to be fixed.  Currently fgauss won't
+	work with dmrqmin.  Things got to be sorted out.
+
+24 February 2006: [v1.2.5]
+	added install-all rule to Makefile. run ranlib after installation of
+	lib for ld on Darwin. turn off 'shared' rule on macosx.

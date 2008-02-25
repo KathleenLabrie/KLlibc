@@ -26,7 +26,6 @@ int evalfunc(double **x, double *y, int ndim, unsigned long ndata,
  unsigned long n;
  double point[ndim],value;
  double junk[ncoeff];
-
  
  for (n=0; n<ndata; n++) {
    for (dim=0;dim<ndim;dim++) point[dim]=x[dim][n];
