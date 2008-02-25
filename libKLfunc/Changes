@@ -1,0 +1,22 @@
+? ????? 2001: [v1.0.0]
+	Ported to Redhat Linux.
+
+5 April 2001:  [v1.1.0]
+	Added utility routine 'evalfunc'
+
+13 April 2001: [v1.2.0]
+	Added utility routine 'evallfunc' to evaluate linear functions like
+	'fpolynome'.  'evallfunc' works only with profiles for now.
+	Added 'fpolynome'.
+
+24 April 2001: [v1.2.1]
+	Makefile maintenance: specified gzip suffix.
+
+15 November 2001: [v1.2.2]
+	Fix Makefile.  Install section wasn't creating directories.
+
+25 July 2002: [v1.2.3]
+	Added functions gammln, factrl.
+	Fixed fmoffatS.  prototype did not match the one in KLfunc.h.
+	Added functions gammq,gcf,gser.
+	Upgrade of Makefile
