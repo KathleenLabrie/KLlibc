@@ -1,2 +1,4 @@
 - documentation
 - shared library?
+- Use UNAME to set OS.
+- Fix that stupid test that 'fails' because of different signs on zeros.

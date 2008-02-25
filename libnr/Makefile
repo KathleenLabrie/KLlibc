@@ -17,8 +17,9 @@ MAKE = make
 GZIP = gzip -S .gz
 
 #### Environment Variable Definitions ####
+UNAME = `uname -s`
 OS = macosx
-PREFIX = /Users/klabrie/prgc
+PREFIX = $(HOME)/prgc
 INCLDIR = $(PREFIX)/include
 LIBDIR = $(PREFIX)/lib
 
@@ -38,7 +39,7 @@ PKGNAME = nr
 BASIC_FILES = Makefile Changes TODO testpkg testfft.dat
 DOCS = doc.txt
 VERSION = 0
-RELEASE = $(VERSION).1.1
+RELEASE = $(VERSION).1.2
 
 #### Object Definitions ####
 OBJECTS = nrutil.o nr_fourn.o nr_rlft3.o

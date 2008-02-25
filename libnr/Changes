@@ -5,3 +5,6 @@
 	eliminate warnings about printf and exit, respectively.  those show
 	up with gcc 4.0.  Run ranlib after lib has been copied (required for
 	ld on Darwin).
+22 May, 2006: [v0.1.2]
+	Use HOME to set PREFIX.  Unable to use UNAME to set OS, yet; added
+	to TODO.

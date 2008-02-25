@@ -7,7 +7,7 @@ if [ "`diff --brief testfftout1 testfft.dat`" ]; then
   status=1
 else echo ok
 fi
-\rm -f testfftout1
+#\rm -f testfftout1
 #
 if [ ${status} != 0 ]
 then echo "Tests failed."
