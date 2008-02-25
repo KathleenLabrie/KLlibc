@@ -18,8 +18,9 @@ MAKE = make
 GZIP = gzip -S .gz
 
 #### Environment Variable Definitions ####
-OS = macosx
-PREFIX = /Users/klabrie/prgc
+UNAME = `uname -s`
+OS = redhat
+PREFIX = $(HOME)/prgc
 INCLDIR = $(PREFIX)/include
 LIBDIR = $(PREFIX)/lib
 
@@ -39,7 +40,7 @@ PKGNAME = KLran
 BASIC_FILES = Makefile Changes TODO
 DOCS = doc.txt
 VERSION = 0
-RELEASE = $(VERSION).2.2
+RELEASE = $(VERSION).2.3
 
 #### Object Definitions ####
 BINS = simbindist
