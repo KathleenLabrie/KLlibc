@@ -63,7 +63,10 @@
 25 September 2003: [v1.3.4]
 	utc2local and mytime.h: added support for HST, EST, EDT.
 
-23 February 2003: [v1.3.5]
+23 February 2006: [v1.3.5]
 	Added install-all rule to Makefile.  Include some .h to avoid warnings
 	when compiling under gcc 4.0.  Run ranlib after installlation of lib
 	for ld on Darwin.
+22 May 2006: [v1.3.6]
+	Use HOME to set PREFIX. Unable to use UNAME to set OS, yet; added
+	to TODO.  Cleaned up the link to the shared library.

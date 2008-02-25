@@ -15,8 +15,9 @@ MAKE = make
 GZIP = gzip -S .gz
 
 #### Environment Variable Definitions ####
-OS = macosx
-PREFIX = /Users/klabrie/prgc
+UNAME = `uname -s`
+OS = redhat
+PREFIX = $(HOME)/prgc
 INCLDIR = $(PREFIX)/include
 LIBDIR = $(PREFIX)/lib
 
@@ -37,7 +38,7 @@ PKGNAME = KLutil
 BASIC_FILES = Makefile Changes TODO
 DOCS = doc.txt
 VERSION = 1
-RELEASE = $(VERSION).3.5
+RELEASE = $(VERSION).3.6
 
 #### Object Definitions ####
 OBJECTS = myutil.o mystruct.o splitstr.o cnvtimefmt.o utc2local.o month.o \
@@ -88,8 +89,7 @@ install-shared :
 	install -d -m 0755 $(LPREFIX)/lib
 	install -m 0755 lib$(PKGNAME).so.$(RELEASE) $(LPREFIX)/lib/
 	/sbin/ldconfig -n $(LPREFIX)/lib/
-	ln -sf $(LPREFIX)/lib/lib$(PKGNAME).so.$(RELEASE) \
-		$(LPREFIX)/lib/lib$(PKGNAME).so
+	ln -sf lib$(PKGNAME).so.$(VERSION) $(LPREFIX)/lib/lib$(PKGNAME).so
 	install -d -m 0755 $(IPREFIX)/include
 	install -m 0644 $(HEADERS) $(IPREFIX)/include/
 
@@ -106,6 +106,6 @@ package-src :
 
 .PHONY: clean
 clean :
-	\rm -f lib$(PKGNAME).a $(OBJECTS) $(TEST_OBJ) $(TEST_BINS)
+	\rm -f lib$(PKGNAME).a lib$(PKGNAME).so.$(RELEASE) $(OBJECTS) $(TEST_OBJ) $(TEST_BINS)
 
 ### End of Makefile ###
