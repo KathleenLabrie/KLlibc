@@ -1,0 +1,7 @@
+22 july 2002: [v0.1.0]
+	Pkg created.  [nr_rlft3, nr_fourn]
+23 Feb, 2006: [v0.1.1]
+	Added install-all rule to Makefile.  Include stdio.h and stdlib.h to
+	eliminate warnings about printf and exit, respectively.  those show
+	up with gcc 4.0.  Run ranlib after lib has been copied (required for
+	ld on Darwin).
