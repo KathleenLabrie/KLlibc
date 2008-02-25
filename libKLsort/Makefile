@@ -17,8 +17,8 @@ MAKE = make
 GZIP = gzip -S .gz
 
 #### Environment Variable Definitions ####
-OS = macosx
-PREFIX = /Users/klabrie/prgc
+OS = redhat
+PREFIX = $(HOME)/prgc
 INCLDIR = $(PREFIX)/include
 LIBDIR = $(PREFIX)/lib
 
@@ -40,7 +40,7 @@ PKGNAME = KLsort
 BASIC_FILES = Makefile Changes TODO
 DOCS = doc.txt
 VERSION = 0
-RELEASE = $(VERSION).2.3
+RELEASE = $(VERSION).2.4
 
 #### Object Definitions ####
 OBJECTS = dclean.o dselect.o dvitable.o dshell.o ipiksrt.o sort2_vecmatrix.o
