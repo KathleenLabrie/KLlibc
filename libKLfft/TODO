@@ -1,0 +1,7 @@
+- The convolution routines don't give exactly the same output
+  as the IRAF gauss routine.  Not far from it but not the same.
+  Will use in the mean time.
+
+- mconv2d not tested.
+- documentation
+- !!!! Figure out what ./testndim and ./testconv are supposed to do.

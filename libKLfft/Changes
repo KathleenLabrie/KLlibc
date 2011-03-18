@@ -1,0 +1,11 @@
+18 Jul 2002: v0.1.0
+	Create library.
+	- drlft3(), dfourn()
+
+03 Sep 2002: v0.2.0
+	Added image convolution routines and wrappers.
+	- conv2d, gconv2d, mconv2d
+	WARNING: still some problems with it.
+
+26 February 2006: v0.2.1
+	add install-all rule. ranlib after installation for Darwin ld.
