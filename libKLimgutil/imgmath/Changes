@@ -1,0 +1,13 @@
+18 April, 2001: [v0.1.0]
+	Ported to Redhat Linux.
+	Added to the KLimgutil package.
+
+24 April 2001: [v0.1.1]
+	Makefile maintenance: specified gzip suffix.
+
+15 November 2001: [v0.1.2]
+	Fix Makefile.  Install section wasn't creating directories.
+
+5 December 2001: [v0.2.0]
+	Fix major bug in operation subroutines.  jj loop was based
+	on section[0] and section[1] instead of [2] and [3].

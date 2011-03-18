@@ -1,0 +1,6 @@
+14 June 2001: [v0.1.0]
+	Routines rewritten and ported to Redhat Linux.
+	Stand-alone or subpackage of KLimgutil.
+
+15 November 2001: [v0.1.1]
+	Fix Makefile.  Install section wasn't creating directories.

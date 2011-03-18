@@ -1,0 +1,38 @@
+19 April, 2001: [v0.1.0]
+	Ported to Redhat Linux
+
+24 April, 2001: [v0.1.1]
+	Makefile maintenance: specified gzip suffix.
+
+25 April, 2001: [v0.1.2]
+	Just added a TODO list.
+
+15 June 2001: [0.2.0]
+	- Fixed bug in Makefile (package-src)
+	- Added the 'imghead' subpackage
+
+26 June 2001: [v0.2.1]
+	Added 'clip' and 'stddev4clip'.
+
+4 September 2001: [v0.2.2]
+	imarith [1.2.0]: 
+		* operation can be done on a section instead of whole image.
+		* fix a bug: when overwrite, wouldn't read 'op2nb'
+
+15 November 2001: [v0.2.3]
+	Fix Makefile.  Install section wasn't creating directories.
+
+5 December 2001: [v0.3.0]
+	Fix major bug in KLimgmath.
+
+14 May 2002: [v0.3.1]
+	maskout [v1.0.1]
+		Add #include <stdio.h> for sprintf()
+		Make message and tmp [2*MAXLENGTH]
+		Fix shortmask for mask name without '/'
+
+8 March 2003: [v0.3.2]
+	Added mask2img to create img from mask file
+
+13 March 2003: [v0.3.3]
+	Added imgstat3D.
