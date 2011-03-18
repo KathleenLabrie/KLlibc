@@ -6,3 +6,4 @@
 
 - Write documentation.
 - shared libraries?
+- Use UNAME to set OS.

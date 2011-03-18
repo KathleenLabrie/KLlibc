@@ -1,3 +1,4 @@
 - getkeyval won't work with a list. problem might be in read_key.
 - Write documentation
 - shared libraries?
+- Use UNAME to set OS.

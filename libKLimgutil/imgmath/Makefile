@@ -17,8 +17,9 @@ MAKE = make
 GZIP = gzip -S .gz
 
 #### Environment Variable Definitions ####
-OS = macosx
-PREFIX = /Users/klabrie/prgc
+UNAME = `uname -s`
+OS = redhat
+PREFIX = $(HOME)/prgc
 INCLDIR = $(PREFIX)/include
 LIBDIR = $(PREFIX)/lib
 
@@ -38,7 +39,7 @@ PKGNAME = KLimgmath
 BASIC_FILES = Makefile Changes TODO
 DOCS = doc.txt
 VERSION = 0
-RELEASE = $(VERSION).2.1
+RELEASE = $(VERSION).2.2
 
 #### Object Definitions ####
 OBJECTS = add2Images.o addImage.o sub2Images.o subImage.o \

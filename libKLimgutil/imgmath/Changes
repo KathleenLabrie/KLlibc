@@ -15,3 +15,6 @@
 27 March 2006: [v0.2.1]
 	Added install-src and install-all rules to Makefile.  Added include
 	statement for gcc4.0 (strlen).
+22 May 2006:[0.2.2]
+	Use HOME to set PREFIX. Unable to use UNAME to set OS, yet; added
+	to TODO.

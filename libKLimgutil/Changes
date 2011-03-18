@@ -42,3 +42,6 @@
 	Added include statements for gcc4.0.
 	Ensure the signness of variable correspond to the sign used in
 	functions.  gcc4.0 seems to be touchy about that. 
+22 May 2006: [v0.3.5]
+	Use HOME to set PREFIX. Unable to use UNAME to set OS, yet; added
+	to TODO.

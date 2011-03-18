@@ -7,3 +7,6 @@
 
 24 February 2006: [v0.1.2]
 	Added install-src and install-all rules to Makefile.
+22 May 2006: [v0.1.3]
+	Use HOME to set PREFIX. Unable to use UNAME to set OS, yet; added
+	to TODO.

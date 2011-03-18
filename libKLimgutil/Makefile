@@ -19,8 +19,9 @@ MAKE = make
 GZIP = gzip -S .gz
 
 #### Environment Variable Definitions ####
-OS = macosx
-PREFIX = /Users/klabrie/prgc
+UNAME = `uname -s`
+OS = redhat
+PREFIX = $(HOME)/prgc
 INCLDIR = $(PREFIX)/include
 LIBDIR = $(PREFIX)/lib
 
@@ -46,7 +47,7 @@ SUBDIRS_CLEAN = $(addprefix clean_, $(SUBDIRS))
 BASIC_FILES = Makefile Changes TODO
 DOCS = doc.txt
 VERSION = 0
-RELEASE = $(VERSION).3.4
+RELEASE = $(VERSION).3.5
 
 #### Object Definitions ####
 BINS = defits dellines imarith maskout shimg mask2img imgstat3D
