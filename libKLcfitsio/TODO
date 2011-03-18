@@ -1,3 +1,4 @@
 - Rewrite read_key to use something like 'klfits_update_key'
 - Find and solve problem with read_key: it won't work when getkeyval
   is using a list of images.
+- Use UNAME to set OS.

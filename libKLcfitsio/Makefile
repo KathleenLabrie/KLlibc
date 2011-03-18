@@ -15,8 +15,9 @@ MAKE = make
 GZIP = gzip -S .gz
 
 #### Environment Variable Definitions ####
-OS = macosx
-PREFIX = /Users/klabrie/prgc
+UNAME = `uname -s`
+OS = redhat
+PREFIX = $(HOME)/prgc
 INCLDIR = $(PREFIX)/include
 LIBDIR = $(PREFIX)/lib
 
@@ -36,7 +37,7 @@ PKGNAME = KLcfitsio
 BASIC_FILES = Makefile Changes TODO
 DOCS = doc.txt
 VERSION = 1
-RELEASE = $(VERSION).2.4
+RELEASE = $(VERSION).2.5
 
 #### Object Definitions ####
 OBJECTS = edit_image.o get_type.o printerror.o printwarning.o \
@@ -84,8 +85,7 @@ install-shared :
 	install -d -m 0755 $(LPREFIX)/lib
 	install -m 0755 lib$(PKGNAME).so.$(RELEASE) $(LPREFIX)/lib/
 	/sbin/ldconfig -n $(LPREFIX)/lib/
-	ln -sf $(LPREFIX)/lib/lib$(PKGNAME).so.$(RELEASE) \
-				$(LPREFIX)/lib/lib$(PKGNAME).so
+	ln -sf lib$(PKGNAME).so.$(VERSION) $(LPREFIX)/lib/lib$(PKGNAME).so
 	install -d -m 0755 $(IPREFIX)/include
 	install -m 0644 $(HEADERS) $(IPREFIX)/include/
 
