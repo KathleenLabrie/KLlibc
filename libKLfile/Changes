@@ -26,3 +26,6 @@
 	because of Darwin ld.  no shared libs for macosx. add some include
 	files to avoid warnings with gcc4.0.  define lvector pointers as
 	unsigned long int, not just long int.
+22 May 2006: [v0.2.5]
+	Use HOME to set PREFIX. Unable to use UNAME to set OS, yet; added
+	to TODO.  Clean up link to shared library.
