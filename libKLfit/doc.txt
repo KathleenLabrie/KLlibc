@@ -1,0 +1,84 @@
+			     KL Data Modeling Library
+			           KLfit v1.0.2
+				   April 23, 2001
+
+Functions taken out of the Numerical Recipes as is (well, modified
+to have first array element equal to zero) or variation on those
+functions.  Includes Least-Square-Fits and the like.
+[NR Chapter 15]
+
+------------------------------------------------------------------------
+Utility function.
+
+dcovsrt:
+	Expand in storage the covariance matrix covar, so as to take into
+	account parameters that are being held fixed.  (For the later,
+	return zero covariances.
+
+	Adapted for double precision.
+
+	void dcovsrt(double **covar, int ma, int ia[], int mfit);
+	  Inputs:
+		**covar	- ma x ma matrix
+		ma		- number of parameters
+		ia[ma]		- id parameters to be fit
+		mfit		- number of parameters to fit.
+	  Output:
+		**covar	- ma x ma matrix
+
+	Calling dcovsrt:
+	  dcovsrt(covar, ma, ia, mfit);
+
+-------------------------------------------------------------------------
+General Linear Least Squares
+
+dlfit:
+	Use chisq minimization to fit for the coeff a[] of a function
+	that depends lineary on a, y = sum(a_i * afunc_i(x)).  From
+	Numerical Recipes.
+	
+	void dlfit(double x[], double y[], double sig[], int ndat, double a[], int ia[],
+        	int ma, double **covar, double *chisq, 
+        	void (*funcs)(double, double [], int))
+
+dlfitg:
+	Least Square Fit using simple gauss elimination - no pivoting or
+	scaling strategies, all matrices are sym-pos-def (A . a = b).
+	
+	The function must depend linearly on 'a',
+			y = sum(a_i * afunc_i(x))
+	
+	void dlfitg(double *x, double *y, double *sig, int ndat, double *a, 
+	      int *ia, int ma, double *chisq, 
+	      void (*funcs)(double, double [], int))
+
+
+-------------------------------------------------------------------------
+Nonlinear Models.
+
+dmrqminD:
+	Levenberg-Marquardt method, attempting to reduce the value chisq of a
+	fit between a set of data points x[1..ndim][1..ndata], y[1..ndata]
+	with individual standard deviation sig[1..ndata], and a nonlinear
+	function dependent on ma coefficients a[1..ma].  Refer to NR.
+
+	Adapted for double precision and multidimensional fit.
+
+	void dmrqminD(double **x, double y[], double sig[], int ndim, int ndata,
+	     double a[], int ia[], int ma, double **covar, double **alpha,
+	     double *chisq,
+	     void (*funcs)(double [], double [], double *, double [], int, int),
+	     double *alamda);
+
+dmrqcofD:
+	Used by dmrqminD to evaluate the linearized fitting matrix alpha, and
+	vector beta (as in eq. NR15.5.8) and calculate chisq.
+
+	Adapted for double precision and multidimensional fit.
+
+	void dmrqcofD(double **x, double y[], double sig[], int ndim, int ndata,
+	     double a[], int ia[], int ma, double **alpha, double beta[],
+	     double *chisq,
+	     void (*funcs)(double [], double [], double *, double [], int, int));
+
+-------------------------------------------------------------------------------
