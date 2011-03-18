@@ -1,0 +1,28 @@
+18 April 2002: [v0.1.0]
+	File I/0 routines
+
+22 April 2002: [v0.1.1]
+	Added the tail2head routine.
+	Improved Makefile
+
+20 June 2002: [v0.1.2]
+	Added rd_vec
+
+30 June 2002: [v0.2.0]
+	Changed prototype of 'rd_set_double' (int *n -> long int *n)
+	Added 'wrcube'
+
+02 September 2002: [v0.2.1]
+	Changed print format in wrcube: %f -> %g
+
+03 September 2002: [v0.2.2]
+	Added 'rdcube'
+
+22 September 2002: [v0.2.3]
+	Add mergecube.
+
+24 February 2006: [v0.2.4]
+	add testsuite rule. add install-all rule. ranlib lib after installation
+	because of Darwin ld.  no shared libs for macosx. add some include
+	files to avoid warnings with gcc4.0.  define lvector pointers as
+	unsigned long int, not just long int.

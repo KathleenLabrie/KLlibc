@@ -1,0 +1,4 @@
+- complete rd_set.  currently only support 'double'
+- wrcube doesn't print to stdout yet.
+- documentation
+- !!!! testcube won't work because the file testcube.dat is nowhere to be found
