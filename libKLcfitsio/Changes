@@ -1,0 +1,63 @@
+V1.0.0
+18 January 2001: Ported to Linux RedHat.
+
+V1.0.1
+3 April 2001:  In 'read_image'.
+	Commented out 'free(fptr);'  I don't know where I originaly
+	got the idea to write that line.  I have discovered that it causes
+	some serious memory allocation problems.  I guess 'fits_close_file'
+	takes care of 'fptr' just like 'fits_open_file' takes care of 
+	creating it.  I suspect that the old version of CFITSIO didn't
+	free the pointer and that the new version does.  The sample programs
+	that came with CFITSIO, and on which read_image is based on, do not
+	have the 'free(fptr)' line.
+
+10 April 2001:  [v1.1.0]
+	'edit_image': Removed #define's related to time, and include
+		mytime.h instead. Removed prototypes for utc2local and
+		cnvtimefmt: they're in mytime.h.  Also removed prototype for
+		printerror and included "./KLcfitsio.h" instead. [v1.2.0]
+
+	'read_image': Removed prototype for printerror, included 
+		"./KLcfitsio.h" [v1.0.2]
+
+	'read_key': Removed prototypes for printerror and get_type, included
+		"./KLcfitsio.h" [v1.0.1]
+
+	'write_key': Removed prototypes for printerror and get_type, included
+		"./KLcfitsio.h" [v1.0.1]
+
+	'write_numbered_key': Removed prototypes for printerror and write_key,
+		included "./KLcfitsio.h" [v1.0.1]
+
+24 April 2001: [v1.1.1]
+	Makefile maintenance: specified gzip suffix.
+
+22 May 2001: [v1.2.0]
+	- Makefile maintenance.
+	- Added a new routine 'create_image'.
+	- Added a set of utilities, use by the library's functions.
+	  Those are found in 'KLcfitsio.c'.
+	- New structure for headers (in KLcfitsio.h)
+	- Include file maintenance.
+
+15 June 2001: [v1.2.1]
+	- Added 'modify_key'
+	- Added 'read_keyword'
+	- Added data types to 'get_type' and 'read_key'
+
+15 November 2001: [v1.2.2]
+	Fix Makefile.  Install section wasn't creating directories.
+
+17 July 2002: [v1.2.3]
+	- Added linked list support for KLFITS_HEADER structure.
+	- Added partial test suite.
+
+24 February 2006: [v1.2.4]
+	- add install-all rule. run ranlib after installation for Darwin ld.
+	no shared libs for macosx.  add some include files to avoid warnings
+	with gcc4.0.
+	- create_image: change type of naxes from unsigned long to long to
+	  	match with cfitsio 3.0 fits_create_img()
+	- read_image: change type of naxes from unsigned long to long to
+		match with cfitsio 3.0 fits_read_keys_lng()

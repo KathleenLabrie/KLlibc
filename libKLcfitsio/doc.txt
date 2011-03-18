@@ -1,0 +1,157 @@
+                          KL FITS I/O Library
+			    KLcfitsio v1.0.1
+			      April 5, 2001
+
+Image I/0
+
+edit_image:
+     Opens a FITS file (new for now) and writes a 2-D array in it
+     (pix[y][x] = value).  Returns an error code.  In new image mode
+     the header of the original image is copied.
+  
+     int edit_image( char filename[], char newfilename[], double **ppix )
+  
+     Arguments :
+       Input : Name of original FITS file         - char filename[]
+               Name of new FITS file              - char newfilename[]
+               2-D array (pix[y][x] = value)      - **ppix
+  
+     Output :
+       Error code : 0 if no error; 1+ if error;
+  
+     Calling edit_image
+      status = edit_image(filename, newfilename, array);
+------------------------------------------------------------------------
+
+read_image:
+     Open a FITS file and read it in to a 2-D array (pix[y][x] = value)
+     Allocates memory for the array.  Returns the address of the pointer 
+     to the array (argument) and an error code.
+ 
+     int read_image( char filename[], > double ***ptr2ppix, 
+     			unsigned long naxes[] )
+ 
+     Arguments :
+       Input : Name of FITS file
+       Output (argument) : Address of the pointer to a 2-array containing the 
+ 			    pixel values, pix[y][x]
+ 			   Length of both axes, x & y, in naxes[2]
+     Output :
+       Error code : 0 if no error; 1+ if error;
+ 
+     Calling read_image
+	status = read_image(filename, &array, naxes);
+	The address of array (**array) is needed because ptr2ppix contains
+	the address of the 2D array ppix (**ppix)
+------------------------------------------------------------------------
+------------------------------------------------------------------------
+Header I/O
+
+read_key:
+     Read the value of a FITS header keyword
+ 
+     int read_key(char filename[], char keyword[], > char value[], char type[],
+ 		 > char comments[]);
+ 
+     Arguments:
+	Input: Name of the FITS file	- char filename[]
+ 		Name of the keyword		- char keyword[]
+ 		Value;s type (string)	- char type[]
+
+	Output: Value as a string		- char value[]
+ 		 Comment			- char comment[]
+
+     Output:
+	Error code: 0 if no error; 1+ if error;
+
+     Calling read_key
+	status = read_key(filename, keyword, value, type, comment);
+------------------------------------------------------------------------
+
+write_key:
+     Append or update a key/value pair in a FITS header
+ 
+     int write_key(char filename[], char keyword[], char value[], char type[], 
+ 		    char comment[]);
+     Arguments:
+	Input: Name of the FITS file	- char filename[]
+ 		Name of the keyword		- char keyword[]
+ 		Value as a string		- char value[]
+ 		Value's type (string)	- char type[]
+ 		Comment			- char comment[]
+
+     Output:
+	Error code: 0 if no error; 1+ if error;
+
+     Calling write_key
+	status = write_key(filename, keyword, value, type, comment);
+------------------------------------------------------------------------
+
+write_numbered_key:
+     Appends a numbered key/value pair in a FITS header.  The root of the
+     key is given as input.  Finds the next numbered key.
+     Eg. If root is MOD, and MOD1 already exist, key will be MOD2.
+ 
+     int write_numbered_key( char filename[], char keyword[], char value[],
+ 		    char type[], char comment[]);
+
+     Arguments:
+ 	   Input: Name of the FITS file	     - char filename[]
+ 		   Root of the keyword  	     - char keyword[]
+ 		   Value as a string		     - char value[]
+ 		   Value's type (string)	     - char type[]
+ 		   Comment			     - char comment[]
+
+     Output:
+ 	   Error code: 0 if no error; 1+ if error;
+
+     Calling write_key
+ 	   status = write_key(filename, keyword, value, type, comment);
+
+------------------------------------------------------------------------
+------------------------------------------------------------------------
+Error Handling
+
+printerror:
+     Print out cfitsio error messages and exit program.
+
+     void printerror( int status );
+
+     Arguments:
+     	   Input:  Cfitsio status code		- int status
+
+     Calling printerror
+     	   printerror( status );
+	   
+------------------------------------------------------------------------
+
+printwarning:
+     Print out cfitsio error messages and continue.
+
+     void printwarning( int status );
+
+     Arguments:
+     	   Input:  Cfitsio status code		- int status
+
+     Calling printwarning
+     	   printwarning( status );
+
+------------------------------------------------------------------------
+------------------------------------------------------------------------
+Miscellaneous
+
+get_type:
+     Translate data type string to cfitsio code
+ 
+     int get_type( char type[]);
+
+     Arguments:
+	   Input: String defining the type    - char type[]
+
+     Output:
+	   Cfitsio data type code
+
+     Calling get_type
+	   datatype = get_type( type );
+------------------------------------------------------------------------
+------------------------------------------------------------------------
