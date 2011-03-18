@@ -9,7 +9,7 @@
 #
 # Coding language: C
 # Compiler: gcc
-# OS: Redhat Linux
+# OS: Redhat Linux, Mac OS X
 #
 #################################################################
 
@@ -17,14 +17,15 @@ MAKE = make
 GZIP = gzip -S .gz
 
 #### Environment Variable Definitions ####
-OS = redhat
-PREFIX = /home/labrie/prgc
+OS = macosx
+PREFIX = /Users/klabrie/prgc
 INCLDIR = $(PREFIX)/include
 LIBDIR = $(PREFIX)/lib
 
 EPREFIX = $(PREFIX)
 LPREFIX = $(EPREFIX)
 IPREFIX = $(EPREFIX)
+SPREFIX = $(EPREFIX)/lib/src
 
 #### Compiler Variable Definitions ####
 CC = gcc
@@ -37,7 +38,7 @@ PKGNAME = KLimghead
 BASIC_FILES = Makefile Changes TODO
 DOCS = doc.txt
 VERSION = 0
-RELEASE = $(VERSION).1.1
+RELEASE = $(VERSION).1.2
 
 #### Object Definitions ####
 BINS = chkey findkey getkeyval
@@ -63,16 +64,24 @@ chkey: chkey.o
 all : main
 
 ## Installing ##
-.PHONY: install
-install :
-	install -d -m 0755 $(EPREFIX)
-	install -m 0755 $(BINS) $(EPREFIX)/
+.PHONY: install-bin install-src
+install : install-bin
+install-all : install-bin install-src
+
+install-bin :
+	install -d -m 0755 $(EPREFIX)/bin
+	install -m 0755 $(BINS) $(EPREFIX)/bin
+
+install-src :
+	install -d -m 0755 $(SPREFIX)/$(PKGNAME)
+	install -m 0644 $(BASIC_FILES) $(DOCS) $(SRC) $(HEADERS) \
+		$(SPREFIX)/$(PKGNAME)
 
 ## Packaging ##
 .PHONY: package-src filelist
 package-src : 
 	tar cvf $(PKGNAME)-$(RELEASE).tar $(BASIC_FILES) $(DOCS) \
-	$(SRC) $(HEADERS)
+		$(SRC) $(HEADERS)
 	$(GZIP) $(PKGNAME)-$(RELEASE).tar
 filelist:
 	\rm -f filelist

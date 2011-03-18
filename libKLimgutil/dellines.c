@@ -26,6 +26,7 @@
 #include <stddef.h>		/* for NULL */
 #include <stdlib.h>		/* for atoi */
 #include <time.h>		/* for time, localtime, struct tm */
+#include <string.h>		/* for gcc4.0, strcpy, strlen, strcat */
 
 #define COLUMN 1
 #define ROW 0
@@ -37,7 +38,8 @@ char *argv[];
 {
  int status=0, mode=-1;
  int i, j, k, ii, jj, kk, ll, nimages;
- unsigned long limit1, limit2, naxes[2];
+ unsigned long limit1, limit2;
+ long naxes[2];
  double **ppix=NULL, **pnew=NULL;
  char **ptmp=NULL, **pimages=NULL;
  char input[MAXLENGTH], prefix[MAXLENGTH/2], output[MAXLENGTH];

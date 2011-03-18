@@ -40,7 +40,7 @@
 #include "./KLimgmath.h"
 
 int mul2Images(double **ppix1, double **ppix2, double **presult,
-	unsigned long naxes[], unsigned long section[], long dx, long dy)
+	long naxes[], unsigned long section[], long dx, long dy)
 {
  unsigned long ii, jj, kk, ll;
  

@@ -21,13 +21,13 @@
 
 void clip(int iter, double **ppix, long ii, long jj, STATS *stats, CLIP *cpar,
 		double **pdeviant);
-int make_mask(double **pcoo, unsigned long npts, unsigned long naxes[], 
+int make_mask(double **pcoo, unsigned long npts, long naxes[], 
                 double ***ptr2mask);
 int read_points( char filename[], double ***ptr2pcoo, unsigned long *npts,
                  long dx, long dy );
-int shift_image( double **ppix, unsigned long naxes[], long dii, long djj );
+int shift_image( double **ppix, long naxes[], long dii, long djj );
 void stddev4clip(int iter,CLIP *cpar, double **ppix, double **pmask, long ii, 
-	long jj, unsigned long naxes[], unsigned long halfsigbox[2], 
+	long jj, long naxes[], unsigned long halfsigbox[2], 
 	STATS *stats, RASTER *rscan, double **pdeviant);
 int wrlog( char logfile[], char message[] );
 

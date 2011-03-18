@@ -32,12 +32,12 @@ int argc;
 char *argv[];
 {
  int status,i;
- unsigned long ncoo;
+ long ncoo;
  double *xcoo=NULL, *ycoo=NULL;
  double **pcoo=NULL,**mask=NULL;
  KLFITS_HEADER *headers=NULL;
  
- unsigned long naxes[2];
+ long naxes[2];
  char imgtitle[MAXLENGTH];
  char maskname[MAXLENGTH], imgname[MAXLENGTH];
  

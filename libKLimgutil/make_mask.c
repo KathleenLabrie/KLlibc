@@ -1,16 +1,16 @@
 /* Function : make_mask */
-/* Version: 1.0.0 */
+/* Version: 1.0.1 */
 /*   From a list of coordinates (pcoo[i][axis]) create a 
  *   naxes[0] by naxes[1] array filled with zeros except at the
  *   positions found in the list.
  *
- * int make_mask(double **pcoo, unsigned long npts, unsigned long naxes[], 
+ * int make_mask(double **pcoo, unsigned long npts, long naxes[], 
  *		    > double ***ptr2mask);
  *
  * Arguments :
  *   Inputs : List of coordinates (pcoo[i][axis]) - double **pcoo
  *		Number of points			 - unsigned long *npts
- *		Length of the axes			 - unsigned long naxes[]
+ *		Length of the axes			 - long naxes[]
  *   Output : Pointer to a 2-D mask array		 - double ***ptr2mask
  *
  * Output :
@@ -26,7 +26,7 @@
 #include <myutil.h>
 #include <stdio.h>
 
-int make_mask(double **pcoo, unsigned long npts, unsigned long naxes[], 
+int make_mask(double **pcoo, unsigned long npts, long naxes[], 
 		double ***ptr2mask)
 {
  long ii,jj,n;

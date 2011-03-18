@@ -28,7 +28,7 @@
 #include "./KLimgmath.h"
 
 int subImage(double **ppix1, double value, double **presult,
-	unsigned long naxes[], unsigned long section[])
+	long naxes[], unsigned long section[])
 {
  unsigned long ii, jj, kk, ll;
 

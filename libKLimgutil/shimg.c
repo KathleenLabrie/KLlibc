@@ -30,7 +30,7 @@ char *argv[];
  char fname[MAXLENGTH], newfname[MAXLENGTH];
  int status,i,dim;
  long shift[2];
- unsigned long naxes[2];
+ long naxes[2];
  double **array=NULL;
  char logfile[MAXLENGTH],**p_elem, message[MAXLENGTH],tmp[MAXLENGTH];
  char keyword[MAXLENGTH], comment[MAXLENGTH], *pname;

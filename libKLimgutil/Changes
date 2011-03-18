@@ -36,3 +36,9 @@
 
 13 March 2003: [v0.3.3]
 	Added imgstat3D.
+
+27 March 2006: [v0.3.4]
+	Added install-src rule to Makefile (and for the subpackages)
+	Added include statements for gcc4.0.
+	Ensure the signness of variable correspond to the sign used in
+	functions.  gcc4.0 seems to be touchy about that. 

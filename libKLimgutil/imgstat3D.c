@@ -1,5 +1,5 @@
 /* Main : imgstat3D */
-/* Version : 0.1.0 */
+/* Version : 0.1.1 */
 /*  Takes a list of images and calculate statistics for each pixel.  The
  *  stats use the values from the N images of *one given pixel*.  The results
  *  are output in an image, each output pixel containing the value of the
@@ -40,7 +40,7 @@ char *argv[];
 {
  int status,i;
  long int nimages;
- unsigned long naxes[2], ii, jj;
+ long naxes[2], ii, jj;
  double avgsq;
  double **pimage=NULL, **psum=NULL, **psumsq=NULL, **presult=NULL;
  char **p_elem=NULL;

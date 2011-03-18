@@ -1,5 +1,5 @@
 /* Function: stddev4clip */
-/* Version: 0.1.0 */
+/* Version: 0.1.1 */
 /*	Calculate stddev as required for the clipping type.
  *
  * Needs:
@@ -9,7 +9,10 @@
 
 #include <KLutil.h>
 #include <KLstats.h>
+#include <stdio.h>	/* for gcc4.0, printf
 #include <stddef.h>	/* for NULL */
+#include <stdlib.h>	/* for gcc4.0, exit */
+#include <math.h>	/* for gcc4.0, sqrt */
 
 void stddev4clip(int iter,CLIP *cpar, double **ppix, double **pmask, long ii, 
 	long jj, unsigned long naxes[], unsigned long halfsigbox[2], 

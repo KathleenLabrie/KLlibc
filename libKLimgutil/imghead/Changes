@@ -4,3 +4,6 @@
 
 15 November 2001: [v0.1.1]
 	Fix Makefile.  Install section wasn't creating directories.
+
+24 February 2006: [v0.1.2]
+	Added install-src and install-all rules to Makefile.

@@ -18,6 +18,7 @@
  */
 
 #include "./KLimgmath.h"
+#include <string.h>		/* for gcc4.0, strlen */
 
 int img_or_value(char string[])
 {

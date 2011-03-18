@@ -11,3 +11,7 @@
 5 December 2001: [v0.2.0]
 	Fix major bug in operation subroutines.  jj loop was based
 	on section[0] and section[1] instead of [2] and [3].
+
+27 March 2006: [v0.2.1]
+	Added install-src and install-all rules to Makefile.  Added include
+	statement for gcc4.0 (strlen).

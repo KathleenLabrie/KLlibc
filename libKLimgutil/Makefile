@@ -6,12 +6,12 @@
 # packages.  Also provides various tools to manipulate images
 # (e.g. arithmetic on images, shift an image, crop an image, etc.)
 #
-# Packages required: KLimgmath
-# Libraries required: KLutil KLimgmath
+# Packages required: KLimgmath (provided), KLcfitsio (for KLimghead)
+# Libraries required: KLutil KLimgmath KLstats KLcfitsio (for KLimghead)
 #
 # Coding language: C
 # Compiler: gcc
-# OS: Redhat Linux
+# OS: Redhat Linux, Mac OS X
 #
 #################################################################
 
@@ -19,14 +19,15 @@ MAKE = make
 GZIP = gzip -S .gz
 
 #### Environment Variable Definitions ####
-OS = redhat
-PREFIX = /home/labrie/prgc
+OS = macosx
+PREFIX = /Users/klabrie/prgc
 INCLDIR = $(PREFIX)/include
 LIBDIR = $(PREFIX)/lib
 
-EPREFIX = $(PREFIX)/img/util/
+EPREFIX = $(PREFIX)
 LPREFIX = $(PREFIX)
 IPREFIX = $(PREFIX)
+SPREFIX = $(PREFIX)/lib/src
 
 #### Compiler Variable Definitions ####
 CC = gcc
@@ -38,13 +39,14 @@ CFLAGS = -g -O2 -I./ -I$(INCLDIR)
 PKGNAME = KLimgutil
 SUBDIRS = imgmath imghead
 SUBDIRS_INSTALL = $(addprefix install_, $(SUBDIRS))
+SUBDIRS_INSTALLSRC = $(addprefix installsrc_, $(SUBDIRS))
 SUBDIRS_PKG = $(addprefix pkg_, $(SUBDIRS))
 SUBDIRS_CLEAN = $(addprefix clean_, $(SUBDIRS))
 
 BASIC_FILES = Makefile Changes TODO
 DOCS = doc.txt
 VERSION = 0
-RELEASE = $(VERSION).3.3
+RELEASE = $(VERSION).3.4
 
 #### Object Definitions ####
 BINS = defits dellines imarith maskout shimg mask2img imgstat3D
@@ -97,18 +99,29 @@ shimg: shimg.o
 all : main
 
 ## Installing ##
-.PHONY: $(SUBDIRS_INSTALL)
+.PHONY: $(SUBDIRS_INSTALL) install-src
+
 install : $(SUBDIRS_INSTALL)
-	install -d -m 0755 $(EPREFIX)
-	install -m 0755 $(BINS) $(EPREFIX)/
+	install -d -m 0755 $(EPREFIX)/bin
+	install -m 0755 $(BINS) $(EPREFIX)/bin/
 	install -d -m 0755 $(LPREFIX)/lib
 	install -m 0644 lib$(PKGNAME).a $(LPREFIX)/lib/
 	install -d -m 0755 $(IPREFIX)/include
 	install -m 0644 $(HEADERS) $(IPREFIX)/include/
+	ranlib $(LPREFIX)/lib/lib$(PKGNAME).a
 
 $(SUBDIRS_INSTALL):
 	$(MAKE) -C $(subst install_,,$@) install EPREFIX=$(EPREFIX) \
 		LPREFIX=$(LPREFIX) IPREFIX=$(IPREFIX)	
+
+install-src : $(SUBDIRS_INSTALLSRC)
+	install -d -m 0755 $(SPREFIX)/$(PKGNAME)
+	install -m 0644 $(BASIC_FILES) $(DOCS) $(SRC) $(HEADERS) \
+		$(SPREFIX)/$(PKGNAME)
+
+$(SUBDIRS_INSTALLSRC):
+	$(MAKE) -C $(subst installsrc_,,$@) install-src \
+		SPREFIX=$(SPREFIX)/$(PKGNAME)
 
 ## Packaging ##
 .PHONY: $(SUBDIRS_PKG)

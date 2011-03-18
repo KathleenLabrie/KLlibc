@@ -19,6 +19,7 @@
 #include <KLutil.h>
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>	/* for gcc4.0, exit */
 
 main(argc,argv)
 int argc;

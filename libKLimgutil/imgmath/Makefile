@@ -9,7 +9,7 @@
 #
 # Coding language: C
 # Compiler: gcc
-# OS: Redhat Linux
+# OS: Redhat Linux, Mac OS X
 #
 #################################################################
 
@@ -17,14 +17,15 @@ MAKE = make
 GZIP = gzip -S .gz
 
 #### Environment Variable Definitions ####
-OS = redhat
-PREFIX = /astro/labrie/prgc
+OS = macosx
+PREFIX = /Users/klabrie/prgc
 INCLDIR = $(PREFIX)/include
 LIBDIR = $(PREFIX)/lib
 
 EPREFIX = $(PREFIX)
 LPREFIX = $(EPREFIX)
 IPREFIX = $(EPREFIX)
+SPREFIX = $(EPREFIX)/lib/src
 
 #### Compiler Variable Definitions ####
 CC = gcc
@@ -34,10 +35,10 @@ CFLAGS = -g -O2 -I./ -I$(INCLDIR)
 
 #### Variable Definitions ####
 PKGNAME = KLimgmath
-BASIC_FILES = Makefile Changes
+BASIC_FILES = Makefile Changes TODO
 DOCS = doc.txt
 VERSION = 0
-RELEASE = $(VERSION).2.0
+RELEASE = $(VERSION).2.1
 
 #### Object Definitions ####
 OBJECTS = add2Images.o addImage.o sub2Images.o subImage.o \
@@ -54,15 +55,26 @@ main: $(OBJECTS)
 	ar r lib$(PKGNAME).a $(OBJECTS)
 	ranlib lib$(PKGNAME).a
 
-install:
+## Installing ##
+.PHONY: install-lib install-src
+install: install-lib
+install-all: install-lib install-src
+
+install-lib:
 	install -d -m 0755 $(LPREFIX)/lib
 	install -m 0644 lib$(PKGNAME).a $(LPREFIX)/lib/
 	install -d -m 0755 $(IPREFIX)/include
 	install -m 0644 $(HEADERS) $(IPREFIX)/include/
+	ranlib $(LPREFIX)/lib/lib$(PKGNAME).a
+
+install-src:
+	install -d -m 0755 $(SPREFIX)/$(PKGNAME)
+	install -m 0644 $(BASIC_FILES) $(DOCS) $(SRC) $(HEADERS) \
+		$(SPREFIX)/$(PKGNAME)
 
 package-src:
 	tar cvf lib$(PKGNAME)-$(RELEASE).tar $(BASIC_FILES) $(DOCS) \
-	$(SRC) $(HEADERS)
+		$(SRC) $(HEADERS)
 	$(GZIP) lib$(PKGNAME)-$(RELEASE).tar
 .PHONY: filelist
 filelist:

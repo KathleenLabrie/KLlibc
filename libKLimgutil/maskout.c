@@ -1,5 +1,5 @@
 /* Main: maskout */
-/* Version: 1.0.1 */
+/* Version: 1.0.2 */
 /*	Replace the value of the pixels listed by another value.
  *	e.g. Set all pixels in a mask to zero.
  *
@@ -41,7 +41,8 @@ char *argv[];
  char image[MAXLENGTH], newimage[MAXLENGTH], mask[MAXLENGTH];
  int status,i,clobber;
  long offset[2], ii, jj;
- unsigned long naxes[2],n;
+ long naxes[2];
+ unsigned long n;
  double **ppix=NULL, value,**pcoo=NULL;
  char logfile[MAXLENGTH],**p_elem, message[2*MAXLENGTH], tmp[2*MAXLENGTH];
  char keyword[MAXLENGTH], comment[MAXLENGTH], answer, *shortmask;

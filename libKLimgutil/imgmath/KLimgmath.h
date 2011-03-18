@@ -20,27 +20,27 @@
 int img_or_number(char string[]);
 
 int add2Images(double **ppix1, double **ppix2, double **presult,
-	unsigned long naxes[], unsigned long *section, long dx, long dy);
+	long naxes[], unsigned long *section, long dx, long dy);
 
 int addImage(double **ppix1, double op2nb, double **presult,
-	unsigned long naxes[], unsigned long *section);
+	long naxes[], unsigned long *section);
 
 int sub2Images(double **ppix1, double **ppix2, double **presult,
-	unsigned long naxes[], unsigned long *section, long dx, long dy);
+	long naxes[], unsigned long *section, long dx, long dy);
 
 int subImage(double **ppix1, double op2nb, double **presult,
-	unsigned long naxes[], unsigned long *section);
+	long naxes[], unsigned long *section);
 
 int mul2Images(double **ppix1, double **ppix2, double **presult,
-	unsigned long naxes[], unsigned long *section, long dx, long dy);
+	long naxes[], unsigned long *section, long dx, long dy);
 
 int mulImage(double **ppix1, double op2nb, double **presult,
-	unsigned long naxes[], unsigned long *section);
+	long naxes[], unsigned long *section);
 
 int div2Images(double **ppix1, double **ppix2, double **presult,
-	unsigned long naxes[], unsigned long *section, long dx, long dy);
+	long naxes[], unsigned long *section, long dx, long dy);
 
 int divImage(double **ppix1, double op2nb, double **presult,
-	unsigned long naxes[], unsigned long *section);
+	long naxes[], unsigned long *section);
 
 #endif /* _KL_IMGMATH_H_ */
