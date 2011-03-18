@@ -1,5 +1,5 @@
 /* Function: wrcube */
-/* Version: 0.1.1 */
+/* Version: 0.1.2 */
 /*   Write cube to file or stdout.
  *
  * int wrcube(char filename[], FILE *ostream, fpos_t *pos, 
@@ -43,15 +43,15 @@ int wrcube(char filename[], FILE *ostream, fpos_t *pos, double ***cube,
  
  fprintf(the_stream,"%d  %d  %d\n",n1,n2,n3);
  for (i=0;i<n1;i++) {
-    fprintf(the_stream,"%.2g  ",*(axis1+i));
+    fprintf(the_stream,"%.5g  ",*(axis1+i));
  }
  fprintf(the_stream,"\n");
  for (i=0;i<n2;i++) {
-    fprintf(the_stream,"%.2g  ",*(axis2+i));
+    fprintf(the_stream,"%.5g  ",*(axis2+i));
  }
  fprintf(the_stream,"\n");
  for (i=0;i<n3;i++) {
-    fprintf(the_stream,"%.2g  ",*(axis3+i));
+    fprintf(the_stream,"%.5g  ",*(axis3+i));
  }
  fprintf(the_stream,"\n");
  for (k=0;k<n3;k++) {

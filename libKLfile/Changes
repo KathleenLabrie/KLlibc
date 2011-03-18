@@ -29,3 +29,6 @@
 22 May 2006: [v0.2.5]
 	Use HOME to set PREFIX. Unable to use UNAME to set OS, yet; added
 	to TODO.  Clean up link to shared library.
+16 June 2006: [v0.2.6]
+	make wrcube header be more than %.2g.  Now set to %.5g, but ideally
+	the precision should be one of the function arguments.

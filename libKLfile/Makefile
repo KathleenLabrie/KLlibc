@@ -40,7 +40,7 @@ BASIC_FILES = Makefile Changes TODO
 DOCS = doc.txt
 TEST_FILES = testfile.dat
 VERSION = 0
-RELEASE = $(VERSION).2.5
+RELEASE = $(VERSION).2.6
 
 #### Object Definitions ####
 BINS = tail2head mergecube
