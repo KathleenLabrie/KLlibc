@@ -5,3 +5,4 @@
 - mconv2d not tested.
 - documentation
 - !!!! Figure out what ./testndim and ./testconv are supposed to do.
+- Use UNAME to set OS.

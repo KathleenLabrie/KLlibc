@@ -19,8 +19,9 @@ MAKE = make
 GZIP = gzip -S .gz
 
 #### Environment Variable Definitions ####
-OS = macosx
-PREFIX = /Users/klabrie/prgc
+UNAME = `uname -s`
+OS = redhat
+PREFIX = $(HOME)/prgc
 INCLDIR = $(PREFIX)/include
 LIBDIR = $(PREFIX)/lib
 
@@ -40,7 +41,7 @@ PKGNAME = KLfft
 BASIC_FILES = Makefile Changes TODO testndimimg1.fits testconv.fits
 DOCS = doc.txt
 VERSION = 0
-RELEASE = $(VERSION).2.1
+RELEASE = $(VERSION).2.2
 
 #### Object Definitions ####
 OBJ_LIBS = dfourn.o drlft3.o conv2d.o gconv2d.o mconv2d.o
