@@ -1,0 +1,8 @@
+- Gzip gets completely messed up on 'sole'.  It does the
+  job but complains about it.  (Sounds like people I know...)
+  When I specifically write 'gzip -S .gz lib....' it works
+  fine, but I use a variable, GZIP = -S .gz, $(GZIP) lib...
+  it goes bezerk.  It works fine on Rainette.  Go figure!
+
+- Write documentation.
+- Use UNAME to set OS.

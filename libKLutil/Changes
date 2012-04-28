@@ -1,0 +1,72 @@
+20 February 2001: [v1.0.0]
+	KL Utilities Library ported to RedHat Linux.
+
+10 April 2001: [v1.1.0]
+	Added a couple time handling routines, cnvtimefmt[v1.1.0] and
+	utc2local [v1.1.0].  A new header file, mytime.h, goes with them.
+
+	KLutil.h has been modify to load 'mytime.h'.
+
+	The makefile has been improved (versioning and shared library
+	target)
+
+12 April 2001: [v1.1.1]
+	Added IMIN_VECTOR and IMAX_VECTOR in 'myutil'.
+
+18 April 2001: [v1.1.2]
+	Added the 'month' routine.
+
+	Minor change to Makefile. Automatic naming of the SRC files.
+
+19 April 2001: [v1.1.3]
+	Bug fix.  KLutil.h did not include mystruct.h.
+
+24 April 2001:
+	Makefile maintenance: specified gzip suffix.
+
+25 April 2001:
+	Just added a TODO list.
+
+4 May 2001:
+	Added the parse_imname routine to KLutil library.
+
+8 May 2001: v[1.2.1]
+	Added DMIN_MATRIX, DMAX_MATRIX and lvectorc to myutil.
+
+26 June 2001: v[1.2.2]
+	Added 'delspace' function and 'gettclip' subroutines in mystruct.c.
+
+15 November 2001: [v1.2.3]
+	Fix Makefile.  Install section wasn't creating directories.
+
+27 February 2002: [v1.3.0]
+	Added error numbers and messages.
+	Added a 'return' statement at end of free_clip in mystruct.c
+	Added a PI definition in 'mydef.h'
+	Added a DEBUG flag definition in 'mydef.h'
+	Added a SMALL_NUMBER definition in 'mydef.h'
+	Added 'imatrixc' to myutil.c and myutil.h
+
+19 June 2002: [v1.3.1]
+	Added 'dcubec' to myutil.c and myutil.h
+	Added 'free_dcube' to myutil.c and myutil.h
+
+30 June 2002: [v1.3.2]
+	Added 'equals', 'findindex' to library.
+
+19 July 2002: [v1.3.3]
+	Added wrappers for NR's df3tensor: same as dcube
+	Added dcube. (I had dcubec)
+	Upgraded Makefile
+	Added testcube.
+
+25 September 2003: [v1.3.4]
+	utc2local and mytime.h: added support for HST, EST, EDT.
+
+23 February 2006: [v1.3.5]
+	Added install-all rule to Makefile.  Include some .h to avoid warnings
+	when compiling under gcc 4.0.  Run ranlib after installlation of lib
+	for ld on Darwin.
+22 May 2006: [v1.3.6]
+	Use HOME to set PREFIX. Unable to use UNAME to set OS, yet; added
+	to TODO.  Cleaned up the link to the shared library.

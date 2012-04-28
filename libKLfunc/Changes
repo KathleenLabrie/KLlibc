@@ -1,0 +1,34 @@
+? ????? 2001: [v1.0.0]
+	Ported to Redhat Linux.
+
+5 April 2001:  [v1.1.0]
+	Added utility routine 'evalfunc'
+
+13 April 2001: [v1.2.0]
+	Added utility routine 'evallfunc' to evaluate linear functions like
+	'fpolynome'.  'evallfunc' works only with profiles for now.
+	Added 'fpolynome'.
+
+24 April 2001: [v1.2.1]
+	Makefile maintenance: specified gzip suffix.
+
+15 November 2001: [v1.2.2]
+	Fix Makefile.  Install section wasn't creating directories.
+
+25 July 2002: [v1.2.3]
+	Added functions gammln, factrl.
+	Fixed fmoffatS.  prototype did not match the one in KLfunc.h.
+	Added functions gammq,gcf,gser.
+	Upgrade of Makefile
+
+22 September 2003: [v1.2.4]
+	Fixed fgauss.  Prototype did not match the one in KLfunc.h.
+ 	This whole package got to be fixed.  Currently fgauss won't
+	work with dmrqmin.  Things got to be sorted out.
+
+24 February 2006: [v1.2.5]
+	added install-all rule to Makefile. run ranlib after installation of
+	lib for ld on Darwin. turn off 'shared' rule on macosx.
+22 May 2006: [v1.2.6]
+	Use HOME to set PREFIX. Unable to use UNAME to set OS, yet; added
+	to TODO.  Clean up link to shared library.

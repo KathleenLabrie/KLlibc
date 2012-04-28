@@ -1,0 +1,54 @@
+                        KL Utilities Library
+			    KLutil v1.1.5
+			   April 25, 2001
+
+Library's basic modules
+
+- mydef: Collection of definitions.  (e.g. MAXLENGTH)
+	Files list:
+		- mydef.h
+
+- myutil: Useful functions.  Among them are memory allocation
+	functions for vectors and matrices of different types
+	Files list:
+		- myutil.h
+		- myutil.o
+
+- mystruct: Various useful structures.
+	Files list:
+		- mystruct.h
+		- mystruct.o
+
+- mytime: Time handling functions
+	Files list:
+		- mytime.h
+		- cnvtimefmt.o
+		- month.o
+		- utc2local.o
+
+---------------------------------------------------------------
+String functions
+
+splitstr:
+	Split a line into words.  Save the words into a string vector.
+
+	int splitstr( char line[], > char *p_line[], char delimiter[])
+	
+	Arguments:
+	   Inputs : 	line to parse           - char line[]
+                   	token                   - char delimiter[]
+	   Outputs :
+			vector of strings       - char *p_line[]
+
+	Output :
+	   Number of words found.
+
+	Calling splitstr :
+	  #include <myutil.h>
+	  ...
+	  char **p_line;
+	  p_line = svector(MAXCOLS, MAXLENGTH);
+	  splitstr(line, p_line, <string>);
+
+	  For spaces and tab, use SPACES defined in mydef.h
+----------------------------------------------------------------------

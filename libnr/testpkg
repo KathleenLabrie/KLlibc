@@ -1,0 +1,15 @@
+#
+status=0
+echo -n "Testing nr_rlft3 and nr_fourn ... "
+./testfft > testfftout1
+if [ "`diff --brief testfftout1 testfft.dat`" ]; then
+  echo FAILED
+  status=1
+else echo ok
+fi
+#\rm -f testfftout1
+#
+if [ ${status} != 0 ]
+then echo "Tests failed."
+else echo "Tests were succesful."
+fi
