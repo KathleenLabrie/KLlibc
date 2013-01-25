@@ -30,7 +30,7 @@ int dvitable(double vmain[], unsigned long nmain, double vec[],
    }
    if (!found) {
      fprintf(stderr,ERRMSG_INTERNAL_ERROR);
-     fprintf(stderr,"ERROR: In 'vitable'. Index for %d not found.\n",vec[i]);
+     fprintf(stderr,"ERROR: In 'vitable'. Index for %g not found.\n",vec[i]);
      return(ERRNO_INTERNAL_ERROR);
    }
  }

@@ -16,8 +16,8 @@ GZIP = gzip -S .gz
 
 #### Environment Variable Definitions ####
 UNAME = `uname -s`
-OS = redhat
-PREFIX = $(HOME)/prgc
+OS = `uname -s`
+PREFIX = $(HOME)/local
 INCLDIR = $(PREFIX)/include
 LIBDIR = $(PREFIX)/lib
 
@@ -62,7 +62,7 @@ test: $(TEST_OBJ)
 	$(CC) -o test $(TEST_OBJ) lib$(PKGNAME).a -lcfitsio
 
 shared : $(OBJECTS)
-	@if [[($(OS) != macosx)]]; then \
+	@if [[($(OS) != Darwin)]]; then \
 	    $(CC) -shared -Wl,-soname,lib$(PKGNAME).so.$(VERSION) \
 	        -o lib$(PKGNAME).so.$(RELEASE) $(OBJECTS); \
         else \
@@ -103,6 +103,6 @@ package-src :
 .PHONY: clean
 clean :
 	\rm -f lib$(PKGNAME).a lib$(PKGNAME).so.$(RELEASE) $(OBJECTS) \
-		$(TEST_OBJ)
+		$(TEST_OBJ) test
 
 ### End of Makefile ###

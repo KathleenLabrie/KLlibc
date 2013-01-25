@@ -41,7 +41,7 @@ int rdcube(char filename[], FILE *istream, fpos_t *pos,
  }
  
 
- fscanf(the_stream,"%d  %d  %d\n",n1,n2,n3);
+ fscanf(the_stream,"%ld  %ld  %ld\n",n1,n2,n3);
 
  /* allocate memory when required */
  if (*pcube == NULL) { *pcube=dcube(*n3,*n2,*n1); }

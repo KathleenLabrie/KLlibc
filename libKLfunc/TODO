@@ -1,0 +1,5 @@
+On Jan 24, 2013, there were no TODO file in this package.
+
+- Write documentation.
+- Use UNAME to set OS.  (needs clean up)
+- Write a configure script.

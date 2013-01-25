@@ -17,8 +17,8 @@ GZIP = gzip -S .gz
 
 #### Environment Variable Definitions ####
 UNAME = `uname -s`
-OS = redhat
-PREFIX = $(HOME)/prgc
+OS = `uname -s`
+PREFIX = $(HOME)/local
 INCLDIR = $(PREFIX)/include
 LIBDIR = $(PREFIX)/lib
 
@@ -94,7 +94,7 @@ package-src:
 ## Cleaning ##
 .PHONY: clean
 clean:
-	\rm -f $(OBJECTS) $(TEST_BINS) $(TEST_OBJ)
+	\rm -f $(OBJECTS) $(TEST_BINS) $(TEST_OBJ) lib$(PKGNAME).a
 
 ### End of Makefile ###
 	  

@@ -96,8 +96,8 @@ char *argv[];
  
  /* Parse otherargs */
  if (n != 2) {
- 	fprintf(stderr, ERRMSG_INPUT_ERROR);
-	fprintf(stderr, HELP_MERGECUBE);
+ 	fprintf(stderr, "%s", ERRMSG_INPUT_ERROR);
+	fprintf(stderr, "%s", HELP_MERGECUBE);
 	pre_exit();
 	exit(ERRNO_INPUT_ERROR);
  }
@@ -117,7 +117,7 @@ char *argv[];
 
  if (FLAGS & 1 << DEBUG) { 
    printf("First cube: \n");
-   printf("%d  %d  %d\n",np1,nq1,nr1);
+   printf("%ld  %ld  %ld\n",np1,nq1,nr1);
    for (p=0;p<np1;p++) printf("%g  ",*(paxis1+p));
    printf("\n");
    for (q=0;q<nq1;q++) printf("%g  ",*(qaxis1+q));
@@ -125,7 +125,7 @@ char *argv[];
    for (r=0;r<nr1;r++) printf("%g  ",*(raxis1+r)); 
    printf("\n\n");
    printf("Second cube: \n");
-   printf("%d  %d  %d\n",np2,nq2,nr2);
+   printf("%ld  %ld  %ld\n",np2,nq2,nr2);
    for (p=0;p<np2;p++) printf("%g  ",*(paxis2+p));
    printf("\n");
    for (q=0;q<nq2;q++) printf("%g  ",*(qaxis2+q));
@@ -170,7 +170,7 @@ char *argv[];
  
  if ( FLAGS & 1 << DEBUG ) {
    printf("Sorted new axes:\n");
-   printf("%d  %d  %d\n",np,nq,nr);
+   printf("%ld  %ld  %ld\n",np,nq,nr);
    fflush(stdout);
  }
    
@@ -218,18 +218,18 @@ char *argv[];
  
  if ( FLAGS & 1 << DEBUG ) {
    printf("Index table - First cube: \n");
-   for (p=0;p<np1;p++) printf("%d  ",*(pindex1+p));
+   for (p=0;p<np1;p++) printf("%lu  ",*(pindex1+p));
    printf("\n");
-   for (q=0;q<nq1;q++) printf("%d  ",*(qindex1+q));
+   for (q=0;q<nq1;q++) printf("%lu  ",*(qindex1+q));
    printf("\n");
-   for (r=0;r<nr1;r++) printf("%d  ",*(rindex1+r));
+   for (r=0;r<nr1;r++) printf("%lu  ",*(rindex1+r));
    printf("\n");
    printf("Index table - Second cube: \n");
-   for (p=0;p<np2;p++) printf("%d  ",*(pindex2+p));
+   for (p=0;p<np2;p++) printf("%lu  ",*(pindex2+p));
    printf("\n");
-   for (q=0;q<nq2;q++) printf("%d  ",*(qindex2+q));
+   for (q=0;q<nq2;q++) printf("%lu  ",*(qindex2+q));
    printf("\n");
-   for (r=0;r<nr2;r++) printf("%d  ",*(rindex2+r));
+   for (r=0;r<nr2;r++) printf("%lu  ",*(rindex2+r));
    printf("\n");
    fflush(stdout);
  exit(1);

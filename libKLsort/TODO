@@ -1,3 +1,4 @@
 - Write documentation
 - shared library?
 - Use UNAME to set OS.
+- Write a configure script.

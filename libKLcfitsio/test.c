@@ -16,10 +16,10 @@ main()
  }
  
  for (header = list, j=0; header->next != NULL; header=header->next,j++) {
-   printf("%d %s %d %d\n",j,header->keyword,header->value_lint,header->next);
+   printf("%d %s %ld %d\n",j,header->keyword,header->value_lint,header->next);
  }
- printf("%d %s %d %d\n",j,header->keyword,header->value_lint,header->next);
- 
+ printf("%d %s %ld %d\n",j,header->keyword,header->value_lint,header->next);
+
 
  exit(0);
 }

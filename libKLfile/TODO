@@ -3,3 +3,4 @@
 - documentation
 - !!!! testcube won't work because the file testcube.dat is nowhere to be found
 - Use UNAME to set OS.
+- Write configure script

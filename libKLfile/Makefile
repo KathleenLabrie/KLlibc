@@ -18,8 +18,8 @@ GZIP = gzip -S .gz
 
 #### Environment Variable Definitions ####
 UNAME = `uname -s`
-OS = redhat
-PREFIX = $(HOME)/prgc
+OS = `uname -s`
+PREFIX = $(HOME)/local
 INCLDIR = $(PREFIX)/include
 LIBDIR = $(PREFIX)/lib
 
@@ -85,7 +85,7 @@ testcube : $(OBJ_TEST)
 	$(CC) $(CFLAGS) -o testcube testcube.o lib$(PKGNAME).a $(LIBS_COMMON)
 
 shared : $(OBJ_LIBS)
-	@if [[($(OS) != macosx)]]; then \
+	@if [[($(OS) != Darwin)]]; then \
 	   $(CC) -shared -Wl,-soname,lib$(PKGNAME).so.$(VERSION) \
 	      -o lib$(PKGNAME).so.$(RELEASE) $(OBJ_LIBS); \
         else \
@@ -98,15 +98,15 @@ install : install-lib
 install-all : install-lib install-shared install-src
 
 install-lib :
-	@install -d -m 0755 $(LPREFIX)/lib
-	@install -m 0644 lib$(PKGNAME).a $(LPREFIX)/lib/
-	@install -d -m 0755 $(IPREFIX)/include
-	@install -m 0644 $(HEADERS) $(IPREFIX)/include/
-	@install -d -m 0755 $(EPREFIX)/bin
-	@for file in $(BINS) ; do \
+	install -d -m 0755 $(LPREFIX)/lib
+	install -m 0644 lib$(PKGNAME).a $(LPREFIX)/lib/
+	install -d -m 0755 $(IPREFIX)/include
+	install -m 0644 $(HEADERS) $(IPREFIX)/include/
+	install -d -m 0755 $(EPREFIX)/bin
+	for file in $(BINS) ; do \
 	  install -m 0755 $$file $(EPREFIX)/bin/; \
 	done
-	@ranlib $(LPREFIX)/lib/lib$(PKGNAME).a
+	ranlib $(LPREFIX)/lib/lib$(PKGNAME).a
 
 install-shared :
 	install -d -m 0755 $(LPREFIX)/lib
@@ -117,10 +117,10 @@ install-shared :
 	install -m 0644 $(HEADERS) $(IPREFIX)/include/
 
 install-src :
-	@install -d -m 0755 $(SPREFIX)/$(PKGNAME)
-	@install -m 0644 $(BASIC_FILES) $(DOCS) $(SRC) $(HEADERS) \
+	install -d -m 0755 $(SPREFIX)/$(PKGNAME)
+	install -m 0644 $(BASIC_FILES) $(DOCS) $(SRC) $(HEADERS) \
 	  $(SPREFIX)/$(PKGNAME)/
-	@install -m 0644 $(TEST_FILES) $(SPREFIX)/$(PKGNAME)/
+	install -m 0644 $(TEST_FILES) $(SPREFIX)/$(PKGNAME)/
 
 package-src :
 	tar cvf lib$(PKGNAME)-$(RELEASE).tar $(BASIC_FILES) $(DOCS) \
@@ -130,6 +130,6 @@ package-src :
 .PHONY: clean
 clean :
 	\rm -f lib$(PKGNAME).a lib$(PKGNAME).so.$(RELEASE) $(OBJECTS) \
-	  $(BINS) $(TEST_BINS)
+	  $(BINS) $(BINS_TEST)
 
 ### End of Makefile ###

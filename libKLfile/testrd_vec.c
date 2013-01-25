@@ -26,7 +26,7 @@ char *argv[];
  	fprintf(stderr,"ERROR in rd_vec_string\n");
 	exit(1);
  }
- printf("rd_vec_string - Test 1 : length=%d\n",n);
+ printf("rd_vec_string - Test 1 : length=%ld\n",n);
  for (i=0;i<n;i++) { printf("%s\n",vec_string[i]); }
  free_svector(vec_string);
  vec_string=NULL;
@@ -41,7 +41,7 @@ char *argv[];
  	fprintf(stderr,"ERROR in rd_vec_string\n");
 	exit(1);
  }
- printf("rd_vec_string - Test 2 : length=%d\n",n);
+ printf("rd_vec_string - Test 2 : length=%ld\n",n);
  for (i=0;i<n;i++) { printf("%s\n",vec_string[i]); } 	
  free_svector(vec_string);
  vec_string=NULL;
@@ -54,7 +54,7 @@ char *argv[];
   	fprintf(stderr,"ERROR in rd_vec_string\n");
 	exit(1);
  }
- printf("rd_vec_string - Test 3 : length=%d\n",n);
+ printf("rd_vec_string - Test 3 : length=%ld\n",n);
  for (i=0;i<n;i++) { printf("%s\n",vec_string[i]); }
  free_svector(vec_string);
  vec_string=NULL;
@@ -70,7 +70,7 @@ char *argv[];
  	fprintf(stderr,"ERROR in rd_vec_string\n");
 	exit(1);
  }
- printf("rd_vec_string - Test 4 : length=%d\n",n);
+ printf("rd_vec_string - Test 4 : length=%ld\n",n);
  for (i=0;i<n;i++) { printf("%s\n",vec_string[i]); } 	
  free_svector(vec_string);
  vec_string=NULL;
@@ -84,7 +84,7 @@ char *argv[];
   	fprintf(stderr,"ERROR in rd_vec_string\n");
 	exit(1);
  }
- printf("rd_vec_string - Test 5 : length=%d\n",n);
+ printf("rd_vec_string - Test 5 : length=%ld\n",n);
  for (i=0;i<n;i++) { printf("%s\n",vec_string[i]); }
  free_svector(vec_string);
  vec_string=NULL;
@@ -95,7 +95,7 @@ char *argv[];
  	fprintf(stderr,"ERROR in rd_vec_double\n");
 	exit(1);
  }
- printf("rd_vec_double - Test 1 : length=%d\n",n);
+ printf("rd_vec_double - Test 1 : length=%ld\n",n);
  for (i=0;i<n;i++) { printf("%f\n",vec_double[i]); }
  free_dvector(vec_double);
  vec_double=NULL;
@@ -110,7 +110,7 @@ char *argv[];
  	fprintf(stderr,"ERROR in rd_vec_double\n");
 	exit(1);
  }
- printf("rd_vec_double - Test 2 : length=%d\n",n);
+ printf("rd_vec_double - Test 2 : length=%ld\n",n);
  for (i=0;i<n;i++) { printf("%f\n",vec_double[i]); } 	
  free_dvector(vec_double);
  vec_double=NULL;

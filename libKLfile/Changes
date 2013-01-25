@@ -32,3 +32,8 @@
 16 June 2006: [v0.2.6]
 	make wrcube header be more than %.2g.  Now set to %.5g, but ideally
 	the precision should be one of the function arguments.
+#-----------
+24 Jan 2013:
+	From now on, updates are tracked in repository comments.  This
+	file will only contain summaries of relevant changes associated
+	with releases.

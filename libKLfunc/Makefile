@@ -17,8 +17,8 @@ GZIP = gzip -S .gz
 
 #### Environment Variable Definitions ####
 UNAME = `uname -s`
-OS = redhat
-PREFIX = $(HOME)/prgc
+OS = `uname -s`
+PREFIX = $(HOME)/local
 INCLDIR = $(PREFIX)/include
 LIBDIR = $(PREFIX)/lib
 
@@ -59,7 +59,7 @@ main : $(OBJECTS)
 all : main
 
 shared : $(OBJECTS)
-	@if [[($(OS) != macosx)]]; then \
+	@if [[($(OS) != Darwin)]]; then \
 		$(CC) -shared -Wl,-soname,lib$(PKGNAME).so.$(VERSION) \
 			-o lib$(PKGNAME).so.$(RELEASE) $(OBJECTS); \
 	else \
@@ -71,23 +71,23 @@ install : install-lib
 install-all : install-lib install-shared install-src
 
 install-lib:
-	@install -d -m 0755 $(LPREFIX)/lib
-	@install -m 0644 lib$(PKGNAME).a $(LPREFIX)/lib/
-	@install -d -m 0755 $(IPREFIX)/include
-	@install -m 0644 $(HEADERS) $(IPREFIX)/include/
-	@ranlib $(LPREFIX)/lib/lib$(PKGNAME).a
+	install -d -m 0755 $(LPREFIX)/lib
+	install -m 0644 lib$(PKGNAME).a $(LPREFIX)/lib/
+	install -d -m 0755 $(IPREFIX)/include
+	install -m 0644 $(HEADERS) $(IPREFIX)/include/
+	ranlib $(LPREFIX)/lib/lib$(PKGNAME).a
 
 install-shared :
-	@install -d -m 0755 $(LPREFIX)/lib
-	@install -m 0755 lib$(PKGNAME).so.$(RELEASE) $(LPREFIX)/lib/
-	@/sbin/ldconfig -n $(LPREFIX)/lib/
-	@ln -sf lib$(PKGNAME).so.$(VERSION) $(LPREFIX)/lib/lib$(PKGNAME).so
-	@install -d -m 0755 $(IPREFIX)/include
-	@install -m 0644 $(HEADERS) $(IPREFIX)/include/
+	install -d -m 0755 $(LPREFIX)/lib
+	install -m 0755 lib$(PKGNAME).so.$(RELEASE) $(LPREFIX)/lib/
+	/sbin/ldconfig -n $(LPREFIX)/lib/
+	ln -sf lib$(PKGNAME).so.$(VERSION) $(LPREFIX)/lib/lib$(PKGNAME).so
+	install -d -m 0755 $(IPREFIX)/include
+	install -m 0644 $(HEADERS) $(IPREFIX)/include/
 
 install-src:
-	@install -d -m 0755 $(SPREFIX)/$(PKGNAME)
-	@install -m 0644 $(SRC) $(HEADERS) $(BASIC_FILES) $(DOCS) \
+	install -d -m 0755 $(SPREFIX)/$(PKGNAME)
+	install -m 0644 $(SRC) $(HEADERS) $(BASIC_FILES) $(DOCS) \
 		$(SPREFIX)/$(PKGNAME)/
 
 package-src :

@@ -32,3 +32,8 @@
 22 May 2006: [v1.2.6]
 	Use HOME to set PREFIX. Unable to use UNAME to set OS, yet; added
 	to TODO.  Clean up link to shared library.
+#-----------
+24 Jan 2013:
+	From now on, updates are tracked in repository comments.  This
+	file will only contain summaries of relevant changes associated
+	with releases.

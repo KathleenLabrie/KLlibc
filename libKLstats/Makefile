@@ -5,7 +5,7 @@
 # Statistical analysis.
 #
 # Package required:
-# Libraries required: KLutil KLfunc
+# Libraries required: KLutil KLfunc KLsort
 #
 # Coding language: C
 # Compiler: gcc
@@ -18,8 +18,8 @@ GZIP = gzip -S .gz
 
 #### Environment Variable Definitions ####
 UNAME = `uname -s`
-OS = redhat
-PREFIX = $(HOME)/prgc
+OS = `uname -s`
+PREFIX = $(HOME)/local
 INCLDIR = $(PREFIX)/include
 LIBDIR = $(PREFIX)/lib
 
@@ -47,7 +47,7 @@ OBJECTS = dquickfmedian.o median2D.o medianbox.o stddev.o stddev2D.o \
 	dchstwo.o
 SRC = $(OBJECTS:.o=.c)
 HEADERS = $(PKGNAME).h
-LIBS = -L$(LIBDIR) -lKLfunc -lKLutil
+LIBS = -L$(LIBDIR) -lKLfunc -lKLutil -lKLsort
 
 %.o : %.c
 	$(CC) -c $(CFLAGS) $<
@@ -59,31 +59,48 @@ main: $(OBJECTS)
 .PHONY: all
 all : main
 
+shared : $(OBJECTS)
+	@if [[($(OS) != Darwin)]]; then \
+		$(CC) -shared -Wl,-soname,lib$(PKGNAME).so.$(VERSION) \
+			-o lib$(PKGNAME).so.$(RELEASE) $(OBJECTS); \
+	else \
+		echo "Cannot build shared libraries for Mac OS X"; \
+	fi
+
+
 ## Installing ##
-.PHONY: install-lib install-src
+.PHONY: install-lib install-shared install-src
 install: install-lib
-install-all: install-lib install-src
+install-all: install-lib install-shared install-src
 
 install-lib:
-	@install -d -m 0755 $(LPREFIX)/lib
-	@install -m 0644 lib$(PKGNAME).a $(LPREFIX)/lib/
-	@install -d -m 0755 $(IPREFIX)/include
-	@install -m 0644 $(HEADERS) $(IPREFIX)/include/
-	@ranlib $(LPREFIX)/lib/lib$(PKGNAME).a
+	install -d -m 0755 $(LPREFIX)/lib
+	install -m 0644 lib$(PKGNAME).a $(LPREFIX)/lib/
+	install -d -m 0755 $(IPREFIX)/include
+	install -m 0644 $(HEADERS) $(IPREFIX)/include/
+	ranlib $(LPREFIX)/lib/lib$(PKGNAME).a
+
+install-shared :
+	install -d -m 0755 $(LPREFIX)/lib
+	install -m 0755 lib$(PKGNAME).so.$(RELEASE) $(LPREFIX)/lib/
+	/sbin/ldconfig -n $(LPREFIX)/lib/
+	ln -sf lib$(PKGNAME).so.$(VERSION) $(LPREFIX)/lib/lib$(PKGNAME).so
+	install -d -m 0755 $(IPREFIX)/include
+	install -m 0644 $(HEADERS) $(IPREFIX)/include/
 
 install-src:
-	@install -d -m 0755 $(SPREFIX)/$(PKGNAME)
-	@install -m 0644 $(SRC) $(HEADERS) $(BASIC_FILES) $(DOCS) \
+	install -d -m 0755 $(SPREFIX)/$(PKGNAME)
+	install -m 0644 $(SRC) $(HEADERS) $(BASIC_FILES) $(DOCS) \
 		$(SPREFIX)/$(PKGNAME)/
 
 ## Packaging ##
 package-src:
 	tar cvf lib$(PKGNAME)-$(RELEASE).tar $(BASIC_FILES) $(DOCS) \
-	$(SRC) $(HEADERS)
+		$(SRC) $(HEADERS)
 	$(GZIP) lib$(PKGNAME)-$(RELEASE).tar
 
 .PHONY: clean
 clean:
-	\rm -f $(OBJECTS) lib$(PKGNAME).a
+	\rm -f $(OBJECTS) lib$(PKGNAME).a lib$(PKGNAME).so.$(RELEASE)
 
 # end of makefile

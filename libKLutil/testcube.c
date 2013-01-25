@@ -45,7 +45,7 @@ void doit(double ***the_cube)
  }
  
  for (k=0;k<LZ;k++) {
-   printf("Slice %d\n",k+1);
+   printf("Slice %ld\n",k+1);
    for (j=0;j<LY;j++) {
      for (i=0;i<LX;i++) {
        printf("%f ",*(*(*(the_cube+k)+j)+i));

@@ -16,8 +16,8 @@ GZIP = gzip -S .gz
 
 #### Environment Variable Definitions ####
 UNAME = `uname -s`
-OS = redhat
-PREFIX = $(HOME)/prgc
+OS = `uname -s`
+PREFIX = $(HOME)/local
 INCLDIR = $(PREFIX)/include
 LIBDIR = $(PREFIX)/lib
 
@@ -61,7 +61,7 @@ main : $(OBJECTS)
 all : main
 
 shared : $(OBJECTS)
-	@if [[($(OS) != macosx)]]; then \
+	@if [[($(OS) != Darwin)]]; then \
 		$(CC) -shared -Wl,-soname,lib$(PKGNAME).so.$(VERSION) \
 			-o lib$(PKGNAME).so.$(RELEASE) $(OBJECTS); \
 	else \

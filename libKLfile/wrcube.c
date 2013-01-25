@@ -41,7 +41,7 @@ int wrcube(char filename[], FILE *ostream, fpos_t *pos, double ***cube,
 	return(ERRNO_IO_ERROR);
  }
  
- fprintf(the_stream,"%d  %d  %d\n",n1,n2,n3);
+ fprintf(the_stream,"%ld  %ld  %ld\n",n1,n2,n3);
  for (i=0;i<n1;i++) {
     fprintf(the_stream,"%.5g  ",*(axis1+i));
  }

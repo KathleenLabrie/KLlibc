@@ -79,7 +79,7 @@ char ynquestion(char question[])
 {
  char ans[5];
  printf("%s",question);
- scanf("%s",&ans);
+ scanf("%s",ans);
  return(ans[0]);
 }
 

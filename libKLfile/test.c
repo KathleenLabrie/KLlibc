@@ -19,7 +19,7 @@ char *argv[];
   
  status = rd_set_double(INPUT_FILE,&c1,&c2,&nlines);
 
- for (i=0;i<nlines;i++) { printf("%d %f %f\n",i,*(c1+i),*(c2+i)); }
+ for (i=0;i<nlines;i++) { printf("%ld %f %f\n",i,*(c1+i),*(c2+i)); }
 
  exit(0);
 }
