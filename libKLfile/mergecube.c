@@ -96,7 +96,7 @@ char *argv[];
  
  /* Parse otherargs */
  if (n != 2) {
- 	fprintf(stderr, "%s", ERRMSG_INPUT_ERROR);
+ 	fprintf(stderr, ERRMSG_INPUT_ERROR, "");
 	fprintf(stderr, "%s", HELP_MERGECUBE);
 	pre_exit();
 	exit(ERRNO_INPUT_ERROR);

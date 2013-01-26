@@ -20,8 +20,8 @@ GZIP = gzip -S .gz
 
 #### Environment Variable Definitions ####
 UNAME = `uname -s`
-OS = redhat
-PREFIX = $(HOME)/prgc
+OS = `uname -s`
+PREFIX = $(HOME)/local
 INCLDIR = $(PREFIX)/include
 LIBDIR = $(PREFIX)/lib
 
@@ -65,6 +65,14 @@ lib$(PKGNAME).a : $(OBJ_LIBS) $(HEADERS)
 
 all : main
 
+shared : $(OBJECTS)
+	@if [[($(OS) != Darwin)]]; then \
+		$(CC) -shared -Wl,-soname,lib$(PKGNAME).so.$(VERSION) \
+			-o lib$(PKGNAME).so.$(RELEASE) $(OBJECTS); \
+	else \
+		echo "Cannot build shared libraries for Mac OS X"; \
+	fi
+
 .PHONY: test $(TEST_BINS)
 test: $(TEST_OBJ) $(TEST_BINS)
 testndim: $(TEST_OBJ)
@@ -84,6 +92,14 @@ install-lib:
 	install -d -m 0755 $(IPREFIX)/include
 	install -m 0644 $(HEADERS) $(IPREFIX)/include/
 	ranlib $(LPREFIX)/lib/lib$(PKGNAME).a
+
+install-shared :
+	install -d -m 0755 $(LPREFIX)/lib
+	install -m 0755 lib$(PKGNAME).so.$(RELEASE) $(LPREFIX)/lib/
+	/sbin/ldconfig -n $(LPREFIX)/lib/
+	ln -sf lib$(PKGNAME).so.$(VERSION) $(LPREFIX)/lib/lib$(PKGNAME).so
+	install -d -m 0755 $(IPREFIX)/include
+	install -m 0644 $(HEADERS) $(IPREFIX)/include/
 
 install-src:
 	install -d -m 0755 $(SPREFIX)/$(PKGNAME)

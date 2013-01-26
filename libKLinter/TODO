@@ -1,3 +1,4 @@
 - documentation
 - figure out how to use ./test ...
 - Use UNAME to set OS.
+- write a configure script

@@ -29,7 +29,7 @@ char *argv[];
  if ( status = rd_set_double(file,&x,&y,&n) ) {
    if (x != NULL) {free_dvector(x);}
    if (y != NULL) {free_dvector(y);}
-   fprintf(stderr,ERRMSG_IO_ERROR);
+   fprintf(stderr,ERRMSG_IO_ERROR,"");
    exit(status);
  }
   

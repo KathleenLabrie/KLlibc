@@ -6,3 +6,4 @@
 - documentation
 - !!!! Figure out what ./testndim and ./testconv are supposed to do.
 - Use UNAME to set OS.
+- write a configure script

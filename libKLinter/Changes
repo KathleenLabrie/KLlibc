@@ -11,7 +11,7 @@
 	Use HOME to set PREFIX. Unable to use UNAME to set OS, yet; added
 	to TODO.
 #-----------
-24 Jan 2012:
+24 Jan 2013:
         From now on, updates are tracked in repository comments.  This
         file will only contain summaries of relevant changes associated
         with releases.

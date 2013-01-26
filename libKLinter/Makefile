@@ -61,6 +61,14 @@ main : $(OBJECTS)
 
 all : main $(TEST_BINS)
 
+shared : $(OBJECTS)
+	@if [[($(OS) != Darwin)]]; then \
+		$(CC) -shared -Wl,-soname,lib$(PKGNAME).so.$(VERSION) \
+			-o lib$(PKGNAME).so.$(RELEASE) $(OBJECTS); \
+	else \
+		echo "Cannot build shared libraries for Mac OS X"; \
+	fi
+
 .PHONY: $(BINS)
 test : $(TEST_OBJ)
 	$(CC) $(CFLAGS) -o test $(TEST_OBJ) lib$(PKGNAME).a $(TEST_LIBS) \
@@ -77,6 +85,14 @@ install-lib:
 	@install -d -m 0755 $(IPREFIX)/include
 	@install -m 0644 $(HEADERS) $(IPREFIX)/include/
 	@ranlib $(LPREFIX)/lib/lib$(PKGNAME).a
+
+install-shared :
+	install -d -m 0755 $(LPREFIX)/lib
+	install -m 0755 lib$(PKGNAME).so.$(RELEASE) $(LPREFIX)/lib/
+	/sbin/ldconfig -n $(LPREFIX)/lib/
+	ln -sf lib$(PKGNAME).so.$(VERSION) $(LPREFIX)/lib/lib$(PKGNAME).so
+	install -d -m 0755 $(IPREFIX)/include
+	install -m 0644 $(HEADERS) $(IPREFIX)/include/
 
 install-src:
 	@install -d -m 0755 $(SPREFIX)/$(PKGNAME)
