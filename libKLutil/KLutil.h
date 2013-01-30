@@ -19,11 +19,23 @@
 #include "./mystruct.h"
 #endif
 
+#define KLUTIL_VERSION "0.9.0"
+
+/* Help for executables */
+#define HELP_TESTSUITE \
+	"\nUsage: testsuite [-vh] [testid]\n\
+	   testid	  : ID of the test to run.  If not specified, all the \
+				  tests will be run.\n\
+	   -h		  : Print help\n\
+	   -v		  : Toggle on verbose\n\
+	   --debug	  : Toggle on debug messages\n\
+	   --version  : Print version\n"
+
 /* User input parsing functions */
 void parse_imname(char imstring[], char imname[], unsigned long **section);
 
 /* String Functions */
-int delspace(char line[]);
+void delspace(char line[]);
 int splitstr(char line[], char *p_line[], char delimiter[]);
 
 /* Math Functions */

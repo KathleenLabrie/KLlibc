@@ -45,8 +45,8 @@ OBJECTS = myutil.o mystruct.o splitstr.o cnvtimefmt.o utc2local.o month.o \
 	parse_imname.o delspace.o equals.o findindex.o
 SRC = $(OBJECTS:.o=.c)
 HEADERS = $(PKGNAME).h myutil.h mydef.h mystruct.h mytime.h
-TEST_BINS = testcube
-TEST_OBJ = testcube.o
+TEST_BINS = testcube testsuite
+TEST_OBJ = testcube.o testsuite.o
 TEST_SRC = $(TEST_OBJ:.o=.c)
 TEST_LIBS = 
 
@@ -72,6 +72,8 @@ shared : $(OBJECTS)
 test: $(TEST_OBJ) $(TEST_BINS)
 testcube: $(TEST_OBJ)
 	$(CC) $(CFLAGS) -o testcube testcube.o lib$(PKGNAME).a $(TEST_LIBS)
+testsuite: $(TEST_OBJ)
+	$(CC) $(CFLAGS) -o testsuite testsuite.o lib$(PKGNAME).a $(TEST_LIBS)
 
 ## Installing ##
 .PHONY: install-lib install-shared install-src

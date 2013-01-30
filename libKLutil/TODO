@@ -7,3 +7,25 @@
 - Write documentation.
 - Use UNAME to set OS.
 - Write a configure script.
+
+- test ynquestion
+
+- Write a test suite!
+
+- What the heck?!  lvector is *unsigned* long.  there are no
+	signed long vector. yet there is a long matrix, and an
+	unsigned long matrix, although that last one is only calloc.
+	What a freaking mess!  What was I thinking.  That needs to
+	be fixed and all the code using those need to be cleaned up.
+
+- add a verbose flag to findindex to turn off the error messaging.
+	Also, I'm not sure not finding the value in the vector should
+	be considered an 'internal error'; it's just not in there.
+
+- month.c shouldn't exit if the month index is beyond range.
+	It should throw an exception or something.
+
+- utc2local is clunky.  Also, it would be nice to have more time
+	manipulation functions.
+
+- Need to add tests for myutil.c/myutil.h and mystruct.c/mystruct.h

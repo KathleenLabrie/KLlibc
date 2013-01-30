@@ -1,6 +1,8 @@
 /* Function : cnvtimefmt */
 /* Version: 1.1.1 */
 /*	Convert a time-date string from one format to another
+ *  WARNING: The timestr must be a variable, not a string constant.
+ *  	Otherwise, you will get a bus error.
  *
  * int cnvtimefmt( char timestr[], char oldfmt[], char newfmt[] )
  *
