@@ -2,14 +2,13 @@
 /* Usage: testsuite testid */
 
 #include "./KLutil.h"
+#include "./testutil.h"
 #include <stdio.h>	/* for stdout, etc */
 #include <stdlib.h> /* for gcc4.0, exit */
 #include <stddef.h> /* for NULL */
 #include <string.h> /* for strncpy, etc */
 
 #define NTESTS 7
-
-int test_result_message(char testname[], int nfailures);
 
 int test_parse_imname();
 int test_splitstr();
@@ -26,13 +25,15 @@ char *argv[];
 {
 	int status = 0, FLAGS;
 	int teststatus = 0;
-	int i, n, id;
+	int i, n, id, test;
+	int nnonstd;
 	int test2run[NTESTS];
-	char **otherargs=NULL;
+	char **nonstdargs=NULL, **otherargs=NULL;
 	char **list_of_tests=NULL;
 
 	/* Initialize */
 	FLAGS=0;
+	nonstdargs = svector(NTESTS+1,MAXLENGTH);
 	otherargs = svector(NTESTS,MAXLENGTH);
 	list_of_tests = svector(NTESTS,MAXLENGTH);
 	list_of_tests[0] = "test_parse_imname";
@@ -44,47 +45,37 @@ char *argv[];
 	list_of_tests[6] = "test_utc2local";
 
 	/* Read command line */
-	i=1;
+	status = test_parse_stdarguments(argc,argv,HELP_TESTSUITE,
+					KLUTIL_VERSION, &FLAGS, nonstdargs, &nnonstd);
+	if (status == CLEAN_EXIT) exit(0);
+	if (FLAGS  & 1 << DEBUG) {
+		printf("nnonstd = %d\n",nnonstd);
+		for (i=0;i<nnonstd;i++) {
+			printf("%s\n", nonstdargs[i]);
+		}
+	}
+
+	i=0;
 	n=0;
-	while (i < argc) {
-		if (!strncmp("--",argv[i],2)) {
-			if (!strncmp("--help",argv[i],6)) {
-				fprintf(stdout,HELP_TESTSUITE);
-				exit(status);
-			}
-			else if (!strncmp("--debug",argv[i],7)) {
-				FLAGS |= 1 << DEBUG;
-			}
-			else if (!strncmp("--version",argv[i],9)) {
-				fprintf(stdout,"libKLutil testsuite v%s\n",KLUTIL_VERSION);
-				exit(status);
-			}
-			else if (!strncmp("--list",argv[i],6)) {
-				for (i=0;i<NTESTS;i++) {
-					fprintf(stdout,"%d %s\n",i+1,list_of_tests[i]);
-					exit(status);
+	while (i < nnonstd) {
+		if (!strncmp("--",nonstdargs[i],2)) {
+			if (!strncmp("--list",nonstdargs[i],6)) {
+				for (test=0;test<NTESTS;test++) {
+					fprintf(stdout,"%d %s\n",test+1,list_of_tests[test]);
 				}
-			}
-			else {
-				fprintf(stderr, ERRMSG_INPUT_ERROR, argv[i]);
-				fprintf(stderr, HELP_TESTSUITE);
-				exit(ERRNO_INPUT_ERROR);
-			}
-		} else if (!strncmp("-",argv[i],1)) {
-			if (!strncmp("-h",argv[i],2)) {
-				fprintf(stdout, HELP_TESTSUITE);
 				exit(status);
 			}
-			else if (!strncmp("-v",argv[i],2)) {
-				FLAGS |= 1 << VERBOSE;
-			}
 			else {
-				fprintf(stderr, ERRMSG_INPUT_ERROR, argv[i]);
+				fprintf(stderr, ERRMSG_INPUT_ERROR, nonstdargs[i]);
 				fprintf(stderr, HELP_TESTSUITE);
 				exit(ERRNO_INPUT_ERROR);
 			}
+		} else if (!strncmp("-",nonstdargs[i],1)) {
+			fprintf(stderr, ERRMSG_INPUT_ERROR, nonstdargs[i]);
+			fprintf(stderr, HELP_TESTSUITE);
+			exit(ERRNO_INPUT_ERROR);
 		} else {
-			strcpy(otherargs[n++],argv[i]);
+			strcpy(otherargs[n++],nonstdargs[i]);
 		}
 		i++;
 	}
@@ -135,20 +126,6 @@ char *argv[];
 	exit(status);
 }
 
-/************************************************************/
-/* Utility functions */
-int test_result_message(char testname[], int nfailures)
-{
-	int status = 0;
-
-	if (nfailures != 0) {
-		status = 1;
-		printf ("%s: %d failures\n",testname, nfailures);
-	} else {
-		printf ("%s: PASS\n",testname);
-	}
-	return(status);
-}
 
 /*************************************************************/
 /* Test 1 - parse_imname */

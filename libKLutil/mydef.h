@@ -32,6 +32,11 @@
 #define ERRMSG_MISSING_INPUT "ERROR: Missing input (%s)\n"
 #define ERRMSG_IO_ERROR "ERROR: I/O error (%s)\n"
 
+/* Other status codes */
+#define CLEAN_EXIT 901		/* when a subroutine needs to tell the
+							   calling routine that an exit is required
+							   even though there's been no errors. */
+
 #define MAX_ITER 201
 
 /* Useful bit definition */

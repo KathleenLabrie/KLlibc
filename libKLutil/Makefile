@@ -42,9 +42,9 @@ RELEASE = $(VERSION).3.6
 
 #### Object Definitions ####
 OBJECTS = myutil.o mystruct.o splitstr.o cnvtimefmt.o utc2local.o month.o \
-	parse_imname.o delspace.o equals.o findindex.o
+	parse_imname.o delspace.o equals.o findindex.o testutil.o
 SRC = $(OBJECTS:.o=.c)
-HEADERS = $(PKGNAME).h myutil.h mydef.h mystruct.h mytime.h
+HEADERS = $(PKGNAME).h myutil.h mydef.h mystruct.h mytime.h testutil.h
 TEST_BINS = testcube testsuite
 TEST_OBJ = testcube.o testsuite.o
 TEST_SRC = $(TEST_OBJ:.o=.c)
