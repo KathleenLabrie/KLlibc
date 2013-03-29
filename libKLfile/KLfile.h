@@ -5,10 +5,21 @@
 #ifndef _KL_FILE_H_
 #define _KL_FILE_H_
 
+#define KLFILE_VERSION "0.9.0"
+
 #define MAXCOLS 30
 #define MAXARGS 10
 
 /* Help for executables */
+#define HELP_TESTSUITE \
+	"\nUsage: testsuite [-vh] [testid]\n\
+	   testid	  : ID of the test to run.  If not specified, all the \
+				  tests will be run.\n\
+	   -h		  : Print help\n\
+	   -v		  : Toggle on verbose\n\
+	   --debug	  : Toggle on debug messages\n\
+	   --version  : Print version\n"
+
 #define HELP_MERGECUBE \
 "\nUsage: mergecube [-vh] cube 1 cube2 [-o newcube]\n\
    cube1       : First cube file\n\

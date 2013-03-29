@@ -44,11 +44,11 @@ RELEASE = $(VERSION).2.6
 
 #### Object Definitions ####
 BINS = tail2head mergecube
-OBJ_BINS = $(addsuffix .o,$(BINS))
-BINS_TEST = test testrd_vec testcube
-OBJ_TEST = $(addsuffix .o,$(BINS_TEST))
-OBJ_LIBS = rd_set.o rd_vec.o wrcube.o rdcube.o
-OBJECTS = $(sort $(OBJ_LIBS) $(OBJ_BINS) $(OBJ_TEST))
+BINS_OBJ = $(addsuffix .o,$(BINS))
+TEST_BINS = testsuite
+TEST_OBJ = $(addsuffix .o,$(TEST_BINS))
+LIBS_OBJ = rd_set.o rd_vec.o wrcube.o rdcube.o
+OBJECTS = $(sort $(LIBS_OBJ) $(BINS_OBJ) $(TEST_OBJ))
 SRC = $(OBJECTS:.o=.c)
 HEADERS = $(PKGNAME).h
 
@@ -58,11 +58,11 @@ LIBS_COMMON = -L./ -L$(LIBDIR) -lKLutil
 %.o : %.c
 	$(CC) -c $(CFLAGS) $<
 
-.PHONY: lib$(PKGNAME).a $(BINS) $(BINS_TEST)
+.PHONY: lib$(PKGNAME).a $(BINS) $(TEST_BINS)
 main : lib$(PKGNAME).a $(BINS)
 
-lib$(PKGNAME).a: $(OBJ_LIBS)
-	ar cr lib$(PKGNAME).a $(OBJ_LIBS)
+lib$(PKGNAME).a: $(LIBS_OBJ)
+	ar cr lib$(PKGNAME).a $(LIBS_OBJ)
 	ranlib lib$(PKGNAME).a
 
 mergecube : mergecube.o
@@ -71,23 +71,19 @@ mergecube : mergecube.o
 tail2head : tail2head.o
 	$(CC) $(CFLAGS) -o tail2head tail2head.o $(LIBS_COMMON)
 
-all : main $(BINS_TEST)
+all : main $(TEST_BINS)
 
-.PHONY: $(BINS_TEST)
-testsuite : $(BINS_TEST)
+.PHONY: $(TEST_BINS)
+alltests : $(TEST_BINS)
 
-test : $(OBJ_TEST)
-	$(CC) $(CFLAGS) -o test test.o lib$(PKGNAME).a $(LIBS_COMMON)
-testrd_vec : $(OBJ_TEST)
-	$(CC) $(CFLAGS) -o testrd_vec testrd_vec.o lib$(PKGNAME).a \
+testsuite : $(TEST_OBJ)
+	$(CC) $(CFLAGS) -o testsuite testsuite.o lib$(PKGNAME).a \
 		$(LIBS_COMMON)
-testcube : $(OBJ_TEST)
-	$(CC) $(CFLAGS) -o testcube testcube.o lib$(PKGNAME).a $(LIBS_COMMON)
 
-shared : $(OBJ_LIBS)
+shared : $(LIBS_OBJ)
 	@if [[($(OS) != Darwin)]]; then \
 	   $(CC) -shared -Wl,-soname,lib$(PKGNAME).so.$(VERSION) \
-	      -o lib$(PKGNAME).so.$(RELEASE) $(OBJ_LIBS); \
+	      -o lib$(PKGNAME).so.$(RELEASE) $(LIBS_OBJ); \
         else \
            echo "Cannot build shared libraries for Mac OS X"; \
         fi
@@ -130,6 +126,6 @@ package-src :
 .PHONY: clean
 clean :
 	\rm -f lib$(PKGNAME).a lib$(PKGNAME).so.$(RELEASE) $(OBJECTS) \
-	  $(BINS) $(BINS_TEST)
+	  $(BINS) $(TEST_BINS)
 
 ### End of Makefile ###
