@@ -13,6 +13,12 @@ KLFITS_HEADER *klfits_header_vector(int nh)
  return(hv);
 }
 
+#define FREE_ARG char*
+void free_klfits_header_vector(KLFITS_HEADER *hv)
+{
+	free((FREE_ARG) hv);
+}
+
 /* Function : klfits_update_key */
 /* Version : 0.1.0 */
 /*   Update/append a header record of an already open FITS file.

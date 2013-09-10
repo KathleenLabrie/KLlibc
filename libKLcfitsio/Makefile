@@ -40,31 +40,41 @@ VERSION = 1
 RELEASE = $(VERSION).2.5
 
 #### Object Definitions ####
-OBJECTS = edit_image.o get_type.o printerror.o printwarning.o \
+TEST_BINS = testsuite test
+TEST_OBJ = $(addsuffix .o,$(TEST_BINS))
+LIBS_OBJ = edit_image.o get_type.o printerror.o printwarning.o \
 	read_image.o read_key.o write_key.o write_numbered_key.o \
 	create_image.o KLcfitsio.o modify_key.o read_keyword.o
+OBJECTS = $(sort $(LIBS_OBJ) $(TEST_OBJ))
 SRC = $(OBJECTS:.o=.c)
 HEADERS = $(PKGNAME).h
-TEST_OBJ = test.o
-TEST_SRC = $(TEST_OBJ:.o=.c)
+
+LIBS_COMMON = -L./ -L$(LIBDIR) -lcfitsio -lKLutil
 
 #### Rule Definitions ####
 %.o : %.c
 	$(CC) -c $(CFLAGS) $<
 
-main : $(OBJECTS)
-	ar cr lib$(PKGNAME).a $(OBJECTS)
+.PHONY: lib$(PKGNAME).a $(TEST_BINS)
+main: lib$(PKGNAME).a
+
+lib$(PKGNAME).a: $(LIBS_OBJ)
+	ar cr lib$(PKGNAME).a $(LIBS_OBJ)
 	ranlib lib$(PKGNAME).a
 
-all : main test
+all : main $(TEST_BINS)
+
+testsuite : $(TEST_OBJ)
+	$(CC) $(CFLAGS) -o testsuite testsuite.o lib$(PKGNAME).a \
+		$(LIBS_COMMON)
 
 test: $(TEST_OBJ)
 	$(CC) -o test $(TEST_OBJ) lib$(PKGNAME).a -lcfitsio
 
-shared : $(OBJECTS)
+shared : $(LIBS_OBJ)
 	@if [[($(OS) != Darwin)]]; then \
 	    $(CC) -shared -Wl,-soname,lib$(PKGNAME).so.$(VERSION) \
-	        -o lib$(PKGNAME).so.$(RELEASE) $(OBJECTS); \
+	        -o lib$(PKGNAME).so.$(RELEASE) $(LIBS_OBJ); \
         else \
             echo "Cannot build shared libraries for Mac OS X"; \
         fi
@@ -102,7 +112,7 @@ package-src :
 
 .PHONY: clean
 clean :
-	\rm -f lib$(PKGNAME).a lib$(PKGNAME).so.$(RELEASE) $(OBJECTS) \
-		$(TEST_OBJ) test
+	\rm -f lib$(PKGNAME).a lib$(PKGNAME).so.$(RELEASE) $(LIBS_OBJ) \
+		$(TEST_OBJ) $(TEST_BINS)
 
 ### End of Makefile ###
