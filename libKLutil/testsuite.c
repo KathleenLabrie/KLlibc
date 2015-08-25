@@ -8,7 +8,7 @@
 #include <stddef.h> /* for NULL */
 #include <string.h> /* for strncpy, etc */
 
-#define NTESTS 7
+#define NTESTS 8
 
 int test_parse_imname();
 int test_splitstr();
@@ -40,9 +40,10 @@ char *argv[];
 	list_of_tests[1] = "test_splitstr";
 	list_of_tests[2] = "test_cnvtimefmt";
 	list_of_tests[3] = "test_delspace";
-	list_of_tests[4] = "test_findindex";
-	list_of_tests[5] = "test_month";
-	list_of_tests[6] = "test_utc2local";
+	list_of_tests[4] = "test_equals";
+	list_of_tests[5] = "test_findindex";
+	list_of_tests[6] = "test_month";
+	list_of_tests[7] = "test_utc2local";
 
 	/* Read command line */
 	status = test_parse_stdarguments(argc,argv,HELP_TESTSUITE,
@@ -111,10 +112,12 @@ char *argv[];
 		case 4:
 			teststatus = test_delspace(); break;
 		case 5:
-			teststatus = test_findindex(); break;
+			teststatus = test_equals(); break;
 		case 6:
-			teststatus = test_month(); break;
+			teststatus = test_findindex(); break;
 		case 7:
+			teststatus = test_month(); break;
+		case 8:
 			teststatus = test_utc2local(); break;
 		default:
 			printf("ERROR: invalid test ID.\n");
@@ -332,7 +335,7 @@ int test_equals()
 	if (!equals(0.0,0.000)) nfailures+=1;
 	if (equals(1.0,0.0)) nfailures+=1;
 	if (equals(1.0,1.000001)) nfailures+=1;
-	if (equals(0.0,1.0)) nfailures+1;
+	if (equals(0.0,1.0)) nfailures+=1;
 
 	teststatus = test_result_message("test_equals",nfailures);
 

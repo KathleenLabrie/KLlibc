@@ -133,8 +133,6 @@ char *argv[];
 	headers = klfits_header_vector(nheaders);
 	status = mktestarray(parray,naxes);
 	status = mktestheader(headers,nheaders);
-	printf("here\n");
-	fflush(stdout);
 
 	/* Run tests */
 	for (i=0;i<n;i++) {
@@ -198,6 +196,7 @@ int test_create_image(double **parray, long int naxes[], KLFITS_HEADER headers[]
 	char **xheaders=NULL;
 	int i, xnheaders;
 	fitsfile *fptr;
+	int junk, keys;
 
 	int NTEST1 = 1;
 
@@ -207,21 +206,30 @@ int test_create_image(double **parray, long int naxes[], KLFITS_HEADER headers[]
 
 	status = create_image(output_image, parray, naxes, headers, nheaders);
 
-	if ( fits_open_file(&fptr, expected_image, READONLY, &status) )
-		nfailures += 1;
-	else if ( fits_hdr2str(fptr, 1, exclude, 2, xheaders, &xnheaders, &status))
-		nfailures += 1;
-	/*else {
-		printf ("here2\n");
-		fflush(stdout);
-		for (i;i<xnheaders;i++) {
-			printf("%s\n",xheaders[i]);
-		}
-	}*/
+	fits_open_file(&fptr, expected_image, READONLY, &status);
+	fits_get_hdu_num(fptr, &junk);
+	printf("%p\n", (void*)fptr);
+	fflush(stdout);
+	fits_hdr2str(fptr, 1, exclude, 2, xheaders, &xnheaders, &status);
+
+	printf("here\n");
+	fflush(stdout);
+//	if ( fits_open_file(&fptr, expected_image, READONLY, &status) )
+//		nfailures += 1;
+//	else if ( fits_hdr2str(fptr, 1, exclude, 2, xheaders, &xnheaders, &status))
+//	 	nfailures += 1;
+//	else {
+//		printf ("here2\n");
+//		fflush(stdout);
+//		for (i=0;i<xnheaders;i++) {
+//			printf("%s\n",xheaders[i]);
+//		}
+//	}
     /*status = read_image(expected_image, &pxpix, xnaxes);*/
 
     /*free_dmatrix(pxpix);*/
 
+	fits_close_file(fptr, &status);
 	teststatus = test_result_message("test_create_image",nfailures);
 
 	return(teststatus);

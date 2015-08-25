@@ -49,7 +49,7 @@ OBJECTS = $(sort $(LIBS_OBJ) $(TEST_OBJ))
 SRC = $(OBJECTS:.o=.c)
 HEADERS = $(PKGNAME).h
 
-LIBS_COMMON = -L./ -L$(LIBDIR) -lcfitsio -lKLutil
+LIBS_COMMON = -L./ -L$(LIBDIR) -L/astro/iraf/URlocal-v1.5.1-macosx-10.7/lib libcfitsio.a -lKLutil
 
 #### Rule Definitions ####
 %.o : %.c
@@ -65,11 +65,10 @@ lib$(PKGNAME).a: $(LIBS_OBJ)
 all : main $(TEST_BINS)
 
 testsuite : $(TEST_OBJ)
-	$(CC) $(CFLAGS) -o testsuite testsuite.o lib$(PKGNAME).a \
-		$(LIBS_COMMON)
+	$(CC) $(CFLAGS) -o testsuite testsuite.o lib$(PKGNAME).a $(LIBS_COMMON)
 
 test: $(TEST_OBJ)
-	$(CC) -o test $(TEST_OBJ) lib$(PKGNAME).a -lcfitsio
+	$(CC) -o test test.o lib$(PKGNAME).a -lcfitsio
 
 shared : $(LIBS_OBJ)
 	@if [[($(OS) != Darwin)]]; then \

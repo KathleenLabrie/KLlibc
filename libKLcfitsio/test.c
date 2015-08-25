@@ -1,6 +1,7 @@
 #include "./KLcfitsio.h"
-#include <stddef.h>
 #include <string.h>
+#include <stdio.h>
+#include <stdlib.h>  /* for exit */
 
 main()
 {
@@ -14,12 +15,12 @@ main()
    header->value_lint = j;
    add_klfits_header( header, &list );
  }
- 
- for (header = list, j=0; header->next != NULL; header=header->next,j++) {
-   printf("%d %s %ld %d\n",j,header->keyword,header->value_lint,header->next);
- }
- printf("%d %s %ld %d\n",j,header->keyword,header->value_lint,header->next);
 
+ for (header = list, j=0; header->next != NULL; header=header->next,j++) {
+   printf("%d %s %ld %ld\n",j,header->keyword,header->value_lint,(long int)header->next);
+ }
+ printf("%d %s %ld %ld\n",j,header->keyword,header->value_lint,(long int)header->next);
+ fflush(stdout);
 
  exit(0);
 }

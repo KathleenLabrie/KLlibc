@@ -1,2 +1,5 @@
 .cproject
 .project
+.idea
+*.o
+*.a
