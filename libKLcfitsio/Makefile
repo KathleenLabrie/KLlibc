@@ -49,7 +49,7 @@ OBJECTS = $(sort $(LIBS_OBJ) $(TEST_OBJ))
 SRC = $(OBJECTS:.o=.c)
 HEADERS = $(PKGNAME).h
 
-LIBS_COMMON = -L./ -L$(LIBDIR) -L/astro/iraf/URlocal-v1.5.1-macosx-10.7/lib libcfitsio.a -lKLutil
+LIBS_COMMON = -L./ -L$(LIBDIR) -lcfitsio -lKLutil
 
 #### Rule Definitions ####
 %.o : %.c

@@ -34,6 +34,14 @@ int test_klfits_header_linkedlist();
 int mktestarray();
 int mktestheader();
 
+// Characteristics of the test image.
+#define NDIM 2
+#define NAXES0 100
+#define NAXES1 200
+#define NTESTHDR 5
+#define NHDR NTESTHDR+7
+#define TESTIMGSUM 1990000
+
 main(argc,argv)
 int argc;
 char *argv[];
@@ -127,8 +135,8 @@ char *argv[];
 	}
 
 	/* Create test data */
-	naxes[0] = 100; naxes[1] = 200;
-	nheaders = 5;
+	naxes[0] = NAXES0; naxes[1] = NAXES1;
+	nheaders = NTESTHDR;
 	parray = dmatrix(naxes[1],naxes[0]);
 	headers = klfits_header_vector(nheaders);
 	status = mktestarray(parray,naxes);
@@ -189,16 +197,26 @@ int test_create_image(double **parray, long int naxes[], KLFITS_HEADER headers[]
 	int nfailures = 0;
 	char output_image[MAXLENGTH]="test_output_image.fits";
 
-	/*long int naxes[2];*/
-	double **pxpix = NULL;
 	char expected_image[MAXLENGTH]="testimage.fits";
 	char **exclude=NULL;
-	char **xheaders=NULL;
-	int i, xnheaders;
+	char *xheaders=NULL;
+	int xdim;
+	int i, xnheaders, value;
+	long int xnaxes[2];
+	char key[KEY_LENGTH];
 	fitsfile *fptr;
-	int junk, keys;
 
 	int NTEST1 = 1;
+
+	/* Create a new image.  Read it back with standard cfitsio
+	 * routines.  Compare what's been read back with known properties
+	 *   - dimension (should be 2)
+	 *   - size (naxes[0] = 100, naxes[1] = 200)
+	 *   - n headers without DATE and IRAF-TLM (should 12)
+	 *   - values of keywords TEST0 to 4 (should be 0 to 4)
+	 *   - sum of pixels (should be 1990000)
+	 *   - value of pixel 49,49 (should be 49)
+	 */
 
 	exclude = svector(2,MAXLENGTH);
 	exclude[0] = "DATE";
@@ -206,30 +224,42 @@ int test_create_image(double **parray, long int naxes[], KLFITS_HEADER headers[]
 
 	status = create_image(output_image, parray, naxes, headers, nheaders);
 
-	fits_open_file(&fptr, expected_image, READONLY, &status);
-	fits_get_hdu_num(fptr, &junk);
-	printf("%p\n", (void*)fptr);
-	fflush(stdout);
-	fits_hdr2str(fptr, 1, exclude, 2, xheaders, &xnheaders, &status);
+	if ( fits_open_file(&fptr, expected_image, READONLY, &status) )
+		nfailures += 1;
+	else if ( fits_hdr2str(fptr, 1, exclude, 2, &xheaders, &xnheaders, &status))
+	 	nfailures += 1;
+	else if ( fits_get_img_dim(fptr, &xdim, &status) )
+		nfailures += 1;
+	else if ( fits_get_img_size(fptr, 2, xnaxes, &status) )
+		nfailures += 1;
+	else {
+		if (xdim != NDIM)
+			nfailures += 1;
+		else if ( xnaxes[0] != NAXES0 && xnaxes[1] != NAXES1)
+			nfailures += 1;
+		else if (xnheaders != NHDR)
+			nfailures += 1;
+	}
 
-	printf("here\n");
-	fflush(stdout);
-//	if ( fits_open_file(&fptr, expected_image, READONLY, &status) )
-//		nfailures += 1;
-//	else if ( fits_hdr2str(fptr, 1, exclude, 2, xheaders, &xnheaders, &status))
-//	 	nfailures += 1;
-//	else {
-//		printf ("here2\n");
-//		fflush(stdout);
-//		for (i=0;i<xnheaders;i++) {
-//			printf("%s\n",xheaders[i]);
-//		}
-//	}
-    /*status = read_image(expected_image, &pxpix, xnaxes);*/
+	// loop over TEST# keyword and check value
+	for (i=0; i<NTESTHDR; i+=1) {
+		sprintf(key,"TEST%d",i);
+		fits_read_key(fptr, TINT, key, &value, NULL, &status);
+		if (value != i)
+			nfailures += 1;
+	}
 
-    /*free_dmatrix(pxpix);*/
+	// get the pixels.  check value at 49,49.  check sum.
+	//else if ( fits_read_pix(fptr, ??datatype, xpixels, xnpixel, NULL,
+	//		                &array, anynul, &status) )
+	//	nfailures += 1;
 
 	fits_close_file(fptr, &status);
+
+	// free memory
+	fits_free_memory(xheaders, &status);
+	free_svector(exclude);
+
 	teststatus = test_result_message("test_create_image",nfailures);
 
 	return(teststatus);
@@ -312,7 +342,14 @@ int test_read_image()
 	int status, teststatus = 0;
 	int nfailures = 0;
 
+	long int xnaxes[2];
+	double **pxpix = NULL;
+
 	int NTEST7 = 1;
+
+	/*status = read_image(expected_image, &pxpix, xnaxes);*/
+
+    /*free_dmatrix(pxpix);*/
 
 	teststatus = test_result_message("test_read_image",nfailures);
 
