@@ -1,0 +1,6 @@
+Old TODO:
+  libKLinter : check for libKLutil
+  libKLlinear: install-src does not work correctly
+  libKLfit: install-src does not work correctly
+  fit : does not have a install-src rule
+  imfilter : does not have an install-src rule
